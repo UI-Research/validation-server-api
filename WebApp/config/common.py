@@ -24,7 +24,7 @@ class Common(Configuration):
         'import_export',             # for importing and exporting data
         
         # Your apps
-        'django-rest-template.users',
+        'WebApp.users',
 
     )
 
@@ -40,9 +40,9 @@ class Common(Configuration):
     )
 
     ALLOWED_HOSTS = ["*"]
-    ROOT_URLCONF = 'django-rest-template.urls'
+    ROOT_URLCONF = 'WebApp.urls'
     SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
-    WSGI_APPLICATION = 'django-rest-template.wsgi.application'
+    WSGI_APPLICATION = 'WebApp.wsgi.application'
 
     # Email
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

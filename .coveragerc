@@ -5,6 +5,6 @@ omit = *migrations*,
        *test*,
        *admin*,
        ./manage.py,
-       ./django-rest-template/config/*,
-       ./django-rest-template/wsgi.py,
+       ./WebApp/config/*,
+       ./WebApp/wsgi.py,
        *__init__*
