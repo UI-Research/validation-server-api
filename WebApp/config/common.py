@@ -25,6 +25,7 @@ class Common(Configuration):
         
         # Your apps
         'WebApp.users',
+        'WebApp.api.v1',
 
     )
 
