@@ -6,6 +6,8 @@ from django.views.generic.base import RedirectView
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
 from .users.views import UserViewSet, UserCreateViewSet
+from django.conf.urls import include, url
+
 
 router = DefaultRouter()
 router.register(r'users', UserViewSet)
@@ -16,6 +18,7 @@ urlpatterns = [
     path('api/v1/', include(router.urls)),
     path('api-token-auth/', views.obtain_auth_token),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api/v1/', include(('WebApp.api.v1.urls', 'WebApp'), namespace='WebApp')),
 
     # the 'api-root' from django rest-frameworks default router
     # http://www.django-rest-framework.org/api-guide/routers/#defaultrouter
