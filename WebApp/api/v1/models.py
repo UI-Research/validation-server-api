@@ -7,7 +7,8 @@ class Run(models.Model):
         (2, 'Tabulation'),
     ]
 
-    run_id = models.IntegerField(primary_key=True, unique=True)
+    run_id = models.AutoField(primary_key=True)
+    #run_id = models.IntegerField(primary_key=True, unique=True)
     researcher_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     run_type = models.IntegerField(choices=RUN_TYPE_CHOICES)
     sanitized_run_input = models.JSONField()
