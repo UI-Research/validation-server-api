@@ -17,5 +17,5 @@ class Run(models.Model):
 
 
     def __str__(self):
-        return self.run_id;
+        return f"Run_{self.run_id}"
 
