@@ -21,6 +21,9 @@ You will need a .env file with the following specifications:
 ```bash
 MYSQL_DATABASE=mysql_data
 MYSQL_ROOT_PASSWORD=root
+# variables used in importing and exporting DB data
+MYSQL_USER=root
+MYSQL_PASSWORD=root
 ```
 
 Then start the dev server for local development:
