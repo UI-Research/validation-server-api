@@ -20,3 +20,7 @@ class Run(models.Model):
     def __str__(self):
         return f"Run_{self.run_id}"
 
+class Budget(models.Model):
+    researcher_id = models.AutoField(primary_key = True)
+    budget_allocated = models.DecimalField(decimal_places = 2, max_digits = 10, null = False, default = 0)
+    budget_used = models.DecimalField(decimal_places = 2, max_digits = 10, null = False, default = 0)
