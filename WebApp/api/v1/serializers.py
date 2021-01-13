@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from WebApp.api.v1.models import Run, Budget
+from WebApp.api.v1.models import Run, Budget, Results
 
 class RunSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,6 +16,18 @@ class BudgetSerializer(serializers.ModelSerializer):
         model = Budget
         fields = [
             "researcher_id",
-            "budget_allocated",
+            "total_budget_allocated",
+            "total_budget_used"
+        ]
+
+class ResultsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Results
+        fields = [
+            "result_id",
+            "run_id",
+            "researcher_id",
+            "result",
+            "return_to_researcher",
             "budget_used"
         ]
