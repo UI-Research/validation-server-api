@@ -84,6 +84,11 @@ To stop the stack:
 docker-compose down
 ```
 
+To run unit tests:
+```bash
+docker-compose run --rm web ./manage.py test
+```
+
 You can programatically hit the API. Note you will need to generate a token 
 from the admin panel.
 
