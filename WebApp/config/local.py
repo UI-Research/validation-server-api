@@ -14,9 +14,8 @@ class Local(Common):
         BASE_DIR,
         '-s',
         '--nologcapture',
-        '--with-coverage',
-        '--with-progressive',
-        '--cover-package=WebApp'
+        '--with-spec',
+        '--spec-color',
     ]
 
     # Mail

@@ -8,7 +8,6 @@ class Run(models.Model):
     ]
 
     run_id = models.AutoField(primary_key=True)
-    #run_id = models.IntegerField(primary_key=True, unique=True)
     researcher_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     run_type = models.IntegerField(choices=RUN_TYPE_CHOICES)
     sanitized_run_input = models.JSONField()
@@ -32,3 +31,4 @@ class Results(models.Model):
     result = models.JSONField()
     return_to_researcher = models.BooleanField(default=False)
     budget_used = models.DecimalField(decimal_places=2, max_digits=10, null=False, default=0)
+

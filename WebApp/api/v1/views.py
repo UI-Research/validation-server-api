@@ -2,9 +2,11 @@ from WebApp.api.v1.models import Run, Budget, Results
 from WebApp.api.v1.serializers import RunSerializer, BudgetSerializer, ResultsSerializer
 from rest_framework import generics
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 
 class RunList(generics.ListCreateAPIView):
-    queryset = Run.objects.all()
+    queryset = Run.objects.all().order_by('-run_id')
     serializer_class = RunSerializer
 
 
@@ -53,3 +55,4 @@ class ResultsList(generics.ListCreateAPIView):
 class ResultsDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Results.objects.all()
     serializer_class = ResultsSerializer
+
