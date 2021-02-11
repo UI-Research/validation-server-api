@@ -16,6 +16,13 @@ class RunSerializer(serializers.ModelSerializer):
 
             
 class BudgetSerializer(serializers.ModelSerializer):
+
+    def validate(self, data):
+        if data["total_budget_used"] > data["total_budget_allocated"]:
+            raise serializers.ValidationError("Cannot exceed budget allocation")
+
+        return data
+
     class Meta:
         model = Budget
         fields = [
