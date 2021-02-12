@@ -13,6 +13,18 @@ class JSONFactory(factory.DictFactory):
         obj = super()._generate(create, attrs)
 
 
+#class UserFactory(factory.django.DjangoModelFactory):
+#    class Meta:
+#        model = User #'users.User'  # Equivalent to ``model = myapp.models.User``
+
+#    username = factory.Sequence(lambda n: 'john%s' % n)
+#    email = factory.LazyAttribute(lambda o: '%s@example.org' % o.username)
+#    date_joined = factory.LazyFunction(datetime.datetime.now)
+
+#class ResearcherUserFactory(UserFactory):
+#    groups.add(Group.objects.get(name='Researcher'))
+
+
 class RunFactory(factory.django.DjangoModelFactory):
 
     class Meta:

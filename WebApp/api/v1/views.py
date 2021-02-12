@@ -4,10 +4,15 @@ from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from WebApp.api.v1.permissions import IsOwnerOrNoAccess
 
 class RunList(generics.ListCreateAPIView):
+    permission_classes = [IsOwnerOrNoAccess]
     queryset = Run.objects.all().order_by('-run_id')
     serializer_class = RunSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        return Run.objects.all().filter(researcher_id=self.request.user).order_by('-run_id')
 
 
 class RunDetail(generics.RetrieveUpdateDestroyAPIView):
