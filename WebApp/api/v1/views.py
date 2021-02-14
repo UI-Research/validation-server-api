@@ -7,15 +7,14 @@ from rest_framework.authentication import SessionAuthentication, BasicAuthentica
 from WebApp.api.v1.permissions import IsOwnerOrNoAccess
 
 class RunList(generics.ListCreateAPIView):
-    permission_classes = [IsOwnerOrNoAccess]
-    queryset = Run.objects.all().order_by('-run_id')
+    permission_classes = [IsAuthenticated, IsOwnerOrNoAccess]
     serializer_class = RunSerializer
 
     def get_queryset(self, *args, **kwargs):
         return Run.objects.all().filter(researcher_id=self.request.user).order_by('-run_id')
 
-
 class RunDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated, IsOwnerOrNoAccess]
     queryset = Run.objects.all()
     serializer_class = RunSerializer
 
@@ -53,11 +52,12 @@ class BudgetDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 
-class ResultsList(generics.ListCreateAPIView):
+class ResultList(generics.ListCreateAPIView):
     queryset = Results.objects.all()
     serializer_class = ResultsSerializer
+    
 
-class ResultsDetail(generics.RetrieveUpdateDestroyAPIView):
+class ResultDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Results.objects.all()
     serializer_class = ResultsSerializer
 
