@@ -5,18 +5,28 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from WebApp.api.v1.permissions import IsOwnerOrNoAccess
+from WebApp.api.v1.backend import Backend
 
 class RunList(generics.ListCreateAPIView):
+    """
+    List all runs, create a new run instance
+    """
     permission_classes = [IsAuthenticated, IsOwnerOrNoAccess]
     serializer_class = RunSerializer
 
     def get_queryset(self, *args, **kwargs):
         return Run.objects.all().filter(researcher_id=self.request.user).order_by('-run_id')
 
+    def perform_create(self, serializer):
+        instance = serializer.save()
+        Backend.send_request(instance.run_id)
+        return Response(serializer.data)  
+
 class RunDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated, IsOwnerOrNoAccess]
     queryset = Run.objects.all()
     serializer_class = RunSerializer
+
 
 class BudgetList(generics.ListCreateAPIView):
     queryset = Budget.objects.all()
@@ -60,4 +70,5 @@ class ResultList(generics.ListCreateAPIView):
 class ResultDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Results.objects.all()
     serializer_class = ResultsSerializer
+
 

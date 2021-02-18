@@ -49,7 +49,8 @@ class Common(Configuration):
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
     ADMINS = (
-        ('Author', 'ddorio@urban.org'),
+        ('Kyle', 'kueyama@urban.org'),
+        ('Silke', 'staylor@urban.org'),
     )
 
     # Postgres

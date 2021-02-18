@@ -15,7 +15,6 @@ services:
       - ./WebApp/scripts/validation_server_api_backup.sql:/scripts/validation_server_api_backup.sql
       - ./WebApp/scripts/:/scripts
 
-
   web:
     container_name: web_server
     restart: always
@@ -35,8 +34,8 @@ services:
     depends_on:
       - mysql
 
-
   documentation:
+    container_name: doc_server
     restart: always
     build: ./
     command: "mkdocs serve"
@@ -44,3 +43,5 @@ services:
       - ./:/code
     ports:
       - "8001:8001"
+
+   

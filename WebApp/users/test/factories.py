@@ -1,6 +1,5 @@
 import factory
 
-
 class UserFactory(factory.django.DjangoModelFactory):
 
     class Meta:
@@ -15,3 +14,5 @@ class UserFactory(factory.django.DjangoModelFactory):
     last_name = factory.Faker('last_name')
     is_active = True
     is_staff = False
+
+   

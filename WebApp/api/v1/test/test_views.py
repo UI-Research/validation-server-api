@@ -30,6 +30,7 @@ class TestRunListTestCase(APITestCase):
         eq_(response.data['results'], serializer.data, 'response_data:{0} \n {1}'.format(response.data, serializer.data))
         eq_(response.status_code, status.HTTP_200_OK)
 
+
 class TestRunDetailTestCase(APITestCase):
     """
     Tests /api/v1/run detail operations
