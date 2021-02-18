@@ -23,6 +23,7 @@ ipdb==0.13.4
 ipython==7.19.0
 mkdocs==1.1.2
 flake8==3.8.4
+httpie==2.4.0
 
 # Testing
 mock==4.0.3
