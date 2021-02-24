@@ -96,7 +96,7 @@ from the admin panel.
 import requests
 
 token = "Token [YOUR TOKEN HERE]"
-headers = {"Authorization":token}
+headers = {"Authorization": f"Token {token}"}
 
 r = requests.get("http://0.0.0.0:8000/api/v1/runs/", headers = headers)
 
