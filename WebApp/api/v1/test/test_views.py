@@ -45,3 +45,24 @@ class TestRunDetailTestCase(APITestCase):
         response = self.client.get(self.url)
         eq_(response.status_code, status.HTTP_403_FORBIDDEN)
 
+class TestBudgetDetailTestCase(APITestCase):
+    """
+    Tests /api/v1/budget detail operations
+    """
+    def setUp(self):
+        self.user = UserFactory()
+        self.user.is_superuser = True
+        self.url = reverse('WebApp:budget-detail', kwargs={'pk': self.user.pk})
+        #self.client.credentials(HTTP_AUTHORIZATION=f'Token {self.user.auth_token}')
+        self.client.force_authenticate(user = self.user, token = self.user.auth_token)
+
+    def test_put_request_updates_budget(self):
+        payload = {'total_budget_allocated': '100.00', 'budget_used': '25.00'}
+        response = self.client.put(self.url, payload)
+        eq_(response.status_code, status.HTTP_200_OK)
+        eq_(response.data["total_budget_used"], "25.00")
+
+    def test_put_request_validates_budget(self):
+        payload = {'total_budget_allocated': '100.00', 'budget_used': '250.00'}
+        response = self.client.put(self.url, payload)
+        eq_(response.status_code, status.HTTP_400_BAD_REQUEST)

@@ -46,21 +46,16 @@ class BudgetDetail(generics.RetrieveUpdateDestroyAPIView):
         budget_used = float(request.data.get("budget_used"))
         total_budget_used = float(total_budget_used) + budget_used
 
-        request.data["total_budget_used"] = total_budget_used
-
+        data = request.data.copy()
+        data["total_budget_used"] = total_budget_used
+        
         # TODO: validate
 
-        #instance.total_budget_used = total_budget_used
-        #instance.save()
-
-        serializer = self.get_serializer(instance, data=request.data, partial=True)
+        serializer = self.get_serializer(instance, data=data, partial=True)
         serializer.is_valid(raise_exception = True)
         self.perform_update(serializer)
         
         return Response(serializer.data)
-
-
-
 
 class ResultList(generics.ListCreateAPIView):
     queryset = Results.objects.all()

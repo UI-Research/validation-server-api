@@ -33,10 +33,3 @@ class RunFactory(factory.django.DjangoModelFactory):
     researcher_id = factory.SubFactory(UserFactory)
     run_type = 1
     sanitized_run_input = factory.Dict( {'run':['test'],}, dict_factory=JSONFactory)
-
-
-class BudgetFactory(factory.django.DjangoModelFactory):
-    
-    class Meta:
-        model = Budget
-
