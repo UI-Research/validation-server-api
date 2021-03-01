@@ -5,7 +5,7 @@ import sys
 
 
 def main():
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django-rest-template.config")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "WebApp.config")
     os.environ.setdefault("DJANGO_CONFIGURATION", "Local")
 
     try:

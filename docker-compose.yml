@@ -4,13 +4,19 @@ services:
   # postgres:
   #   image: postgres:11.6
   mysql:
+    container_name: db_server
     image: mysql:5.7
     restart: always
     ports:
       - "3306:3306"
     env_file: .env
+    volumes:
+      - ./WebApp/scripts/import_mysql_backup.sh:/scripts/import_mysql_backup.sh
+      - ./WebApp/scripts/validation_server_api_backup.sql:/scripts/validation_server_api_backup.sql
+      - ./WebApp/scripts/:/scripts
 
   web:
+    container_name: web_server
     restart: always
     environment:
       - DJANGO_SECRET_KEY=local
@@ -27,7 +33,9 @@ services:
       - "8000:8000"
     depends_on:
       - mysql
+
   documentation:
+    container_name: doc_server
     restart: always
     build: ./
     command: "mkdocs serve"
@@ -35,3 +43,5 @@ services:
       - ./:/code
     ports:
       - "8001:8001"
+
+   
