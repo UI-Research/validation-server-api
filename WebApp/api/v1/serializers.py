@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from WebApp.api.v1.models import Run, Budget, Results
+from WebApp.api.v1.models import Run, IntermediateBudget, Budget, Results
 
 class RunSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,6 +16,22 @@ class RunSerializer(serializers.ModelSerializer):
 
             
 class BudgetSerializer(serializers.ModelSerializer):
+
+    def validate(self, data):
+        if data["total_budget_used"] > data["total_budget_allocated"]:
+            raise serializers.ValidationError("Cannot exceed budget allocation")
+
+        return data
+
+    class Meta:
+        model = Budget
+        fields = [
+            "researcher_id",
+            "total_budget_allocated",
+            "total_budget_used"
+        ]
+
+class IntermediateBudgetSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         if data["total_budget_used"] > data["total_budget_allocated"]:

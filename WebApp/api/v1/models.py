@@ -33,6 +33,15 @@ def create_budget(sender, instance, created, **kwargs):
     if created:
         Budget.objects.create(researcher_id=instance)
 
+class IntermediateBudget(models.Model):
+    researcher_id = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, primary_key=True)
+    total_budget_allocated = models.DecimalField(decimal_places=2, max_digits=10, null=False, default=100)
+    total_budget_used = models.DecimalField(decimal_places=2, max_digits=10, null=False, default=0)
+
+@receiver(post_save, sender=User)
+def create_intermediate_budget(sender, instance, created, **kwargs):
+    if created:
+        IntermediateBudget.objects.create(researcher_id=instance)
 
 class Results(models.Model):
     result_id = models.AutoField(primary_key=True)
