@@ -22,8 +22,8 @@ You will need a .env file with the following specifications:
 MYSQL_DATABASE=mysql_data
 MYSQL_ROOT_PASSWORD=root
 # variables used in importing and exporting DB data
-MYSQL_USER=root
-MYSQL_PASSWORD=root
+MYSQL_USER=sa
+MYSQL_PASSWORD=sa_password
 ```
 
 Build your containers:

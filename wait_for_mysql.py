@@ -9,9 +9,9 @@ check_interval = os.getenv("MYSQL_CHECK_INTERVAL", 1)
 interval_unit = "second" if check_interval == 1 else "seconds"
 
 config = {
-	"dbname": os.getenv("MYSQL_DATABASE", "msqldb"),
-	"user": os.getenv("MYSQL_USER", "root"),
-	"password": os.getenv("MYSQL_PASSWORD", "root"),
+	"dbname": os.getenv("MYSQL_DATABASE", "mysql_data"),
+	"user": os.getenv("MYSQL_USER", "sa"),
+	"password": os.getenv("MYSQL_PASSWORD", "sa_password"),
 	"host": os.getenv("DATABASE_URL", "mysql")
 }
 
