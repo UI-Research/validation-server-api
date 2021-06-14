@@ -10,11 +10,11 @@ jobs:
       - run:
           name: Deploy Code Over SSH
           command: |
-              rsync -avz --exclude '.git' -e "ssh -p 22"  ~/repo/ docker1@validation-server-stg.urban.org:validation-server-stg.urban.org/
+              rsync -avz --exclude '.git' -e "ssh -p 22"  ~/repo/ docker1@validation-server-stg.urban.org:validation-server.urban.org/
       - run:
           name: Build Containers Over SSH
           command: |
-              ssh docker1@validation-server.urban.org -p 22 "cd validation-server.urban.org && ls -lsat && ./deploy.sh -e ${CIRCLE_BRANCH} -m default"
+              ssh docker1@validation-server-stg.urban.org -p 22 "cd validation-server.urban.org && ls -lsat && ./deploy.sh -e ${CIRCLE_BRANCH} -m default"
 workflows:
   version: 2
   build_stg:
