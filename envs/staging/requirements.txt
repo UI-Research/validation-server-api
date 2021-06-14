@@ -1,0 +1,60 @@
+# Core
+pytz==2020.5
+Django==3.1.4
+django-configurations==2.2
+gunicorn==20.0.4
+newrelic==5.24.0.153
+
+# For the persistence stores
+psycopg2-binary==2.8.6
+dj-database-url==0.5.0
+
+# Model Tools
+django-model-utils==4.1.1
+django_unique_upload==0.2.1
+
+# Rest apis
+djangorestframework==3.12.2
+Markdown==3.3.3
+django-filter==2.4.0
+
+# Developer Tools
+ipdb==0.13.4
+ipython==7.19.0
+mkdocs==1.1.2
+flake8==3.8.4
+httpie==2.4.0
+
+# Testing
+mock==4.0.3
+factory-boy==3.2.0
+django-nose==1.4.7
+nose-progressive==1.5.2
+coverage==5.3.1
+pinocchio==0.4.2
+
+# Static and Media Storage
+django-storages==1.11.1
+boto3==1.16.43
+
+# Extras outside original cookiecutter
+# MySql
+django-mysql==3.10.0
+mysqlclient==2.0.2
+
+# Urban App Packages
+django-import-export==2.4.0
+
+# Urban security check packages
+# https://github.com/pyupio/safety
+safety==1.10.0
+
+# https://github.com/bartTC/pip-check/
+pip-check==2.6.0
+
+# https://github.com/PyCQA/bandit
+bandit==1.7.0
+
+# license check packages
+# https://pypi.org/project/pip-licenses/
+pip-licenses==3.2.0
