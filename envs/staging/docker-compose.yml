@@ -2,7 +2,7 @@ version: '2'
 
 services:
   nginx:
-    container_name: nginx_server
+    container_name: proxy
     restart: always
     build: ./nginx/
     image: proxy
@@ -18,7 +18,7 @@ services:
     links:
      - web:web
   mysql:
-    container_name: db_server
+    container_name: mysql
     image: mysql:5.7
     restart: always
     ports:
@@ -29,11 +29,9 @@ services:
       - ./WebApp/scripts/validation_server_api_backup.sql:/scripts/validation_server_api_backup.sql
       - ./WebApp/scripts/:/scripts
   web:
-    container_name: web_server
+    container_name: web
     restart: always
-    environment:
-      - DJANGO_SECRET_KEY=local
-      - MYSQL_DATABASE=mysql_data
+    env_file: .env
     image: web
     build: ./
     command: >
@@ -46,14 +44,5 @@ services:
       - "8000:8000"
     depends_on:
       - mysql
-  documentation:
-    container_name: doc_server
-    restart: always
-    build: ./
-    command: "mkdocs serve"
-    volumes:
-      - ./:/code
-    ports:
-      - "8001:8001"
 
    
