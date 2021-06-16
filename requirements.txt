@@ -44,6 +44,7 @@ mysqlclient==2.0.2
 
 # Urban App Packages
 django-import-export==2.4.0
+drf-yasg==1.20.0
 
 # Urban security check packages
 # https://github.com/pyupio/safety
