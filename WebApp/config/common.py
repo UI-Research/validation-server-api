@@ -22,6 +22,7 @@ class Common(Configuration):
         'rest_framework.authtoken',  # token authentication
         'django_filters',            # for filtering rest endpoints
         'import_export',             # for importing and exporting data
+        'drf_yasg',                  # required for swagger
         
         # Your apps
         'WebApp.users',
