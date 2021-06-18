@@ -8,6 +8,7 @@ COPY nginx.conf  /etc/nginx/
 
 # create SSL dir for certs
 RUN mkdir /etc/nginx/ssl
+COPY ssl/ /etc/nginx/ssl/
 
 # add packages not available in Alpine
 RUN apk update && apk add nano
