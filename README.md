@@ -8,11 +8,20 @@ Template for Django API applications. Check out the project's [documentation](ht
 See [cookiecutter-django-rest](https://github.com/agconti/cookiecutter-django-rest)
 repository for more detail.
 
-# Prerequisites
+### Prerequisites
 
 - [Docker](https://docs.docker.com/docker-for-mac/install/)  
 
-# Local Development
+### Staging Server
+
+* Site: `https://validation-server-stg.urban.org`
+
+* Documentation:
+    - `https://validation-server-stg.urban.org/swagger/`
+    - `https://validation-server-stg.urban.org/swagger.[json | yaml]`
+    - `https://validation-server-stg.urban.org/redoc/`
+
+### Local Development
 
 ** FOR LOCAL TESTING PURPOSES ONLY **
 
@@ -102,3 +111,13 @@ r = requests.get("http://0.0.0.0:8000/api/v1/runs/", headers = headers)
 
 r.json()
 ```
+
+### Notes
+
+* If the `swagger` or `redoc` pages don't load properly, you may need to run:
+
+```bash
+docker exec -it web python manage.py collectstatic --noinput
+```
+
+to pull in the static js files from the `drf-yasg` package.
