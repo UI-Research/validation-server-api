@@ -252,7 +252,7 @@ fi
 echo "-----------------------------------------------------"
 echo "Export mysql data"
 echo "-----------------------------------------------------"
-docker exec -i -t web python manage.py dumpdata --output mydata.json
+docker exec web python manage.py dumpdata --output mydata.json
 
 
 #exit 1 # terminate and indicate error
@@ -310,12 +310,12 @@ if [ -f "./docker-compose.yml" ]; then
       echo "-----------------------------------------------------"
       echo "Create static files"
       echo "-----------------------------------------------------"
-      docker exec -i -t web python manage.py collectstatic --noinput
+      docker exec web python manage.py collectstatic --noinput
 
       echo "-----------------------------------------------------"
       echo "Import mysql data"
       echo "-----------------------------------------------------"
-      docker exec -i -t web python manage.py loaddata mydata.json
+      docker exec web python manage.py loaddata mydata.json
 
 
       docker_ip=$(docker-machine ip $machine_name)
