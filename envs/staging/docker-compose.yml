@@ -3,6 +3,7 @@ version: '2'
 services:
   app:
     container_name: app
+    image: app
     build:
       context: ./validation-server-frontend/services/app/
       dockerfile: dev.DockerFile
