@@ -1,6 +1,22 @@
 version: '2'
 
 services:
+  app:
+    container_name: app
+    build:
+      context: ./validation-server-frontend/services/app/
+      dockerfile: dev.DockerFile
+    environment:
+      # Force polling instead of watching to work around Docker osxfs issues.
+      CHOKIDAR_USEPOLLING: '1'
+      CHOKIDAR_INTERVAL: '1000'
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./validation-server-frontend/services/app/components:/app/components:cached
+      - ./validation-server-frontend/services/app/pages:/app/pages:cached
+      - ./validation-server-frontend/services/app/public:/app/public:cached
+      - ./validation-server-frontend/services/app/styles:/app/styles:cached
   nginx:
     container_name: proxy
     restart: always
