@@ -34,14 +34,14 @@ router.register(r'users', UserCreateViewSet)
 
 urlpatterns = [
     # Swagger
-    url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
-    url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    url(r'^api/swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    url(r'^api/swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    url(r'^api/redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 
-    path('admin/', admin.site.urls),
+    path('api/admin/', admin.site.urls),
     path('api/v1/', include(router.urls)),
-    path('api-token-auth/', views.obtain_auth_token),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api/api-token-auth/', views.obtain_auth_token),
+    path('api/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/v1/', include(('WebApp.api.v1.urls', 'WebApp'), namespace='WebApp')),
 
     # the 'api-root' from django rest-frameworks default router
