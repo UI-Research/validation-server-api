@@ -14,12 +14,14 @@ repository for more detail.
 
 ### Staging Server
 
-* Site: `https://validation-server-stg.urban.org`
+* Front End Site: `https://validation-server-stg.urban.org`
 
-* Documentation:
-    - `https://validation-server-stg.urban.org/swagger/`
-    - `https://validation-server-stg.urban.org/swagger.[json | yaml]`
-    - `https://validation-server-stg.urban.org/redoc/`
+* API (requires log-in): `https://validation-server-stg.urban.org/api/v1/`
+
+* Documentation (requires log-in):
+    - `https://validation-server-stg.urban.org/api/swagger/`
+    - `https://validation-server-stg.urban.org/api/swagger.[json | yaml]`
+    - `https://validation-server-stg.urban.org/api/redoc/`
 
 ### Local Development
 
