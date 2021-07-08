@@ -11,8 +11,12 @@ urlpatterns = [
     path('public-use-budget/<int:pk>/', views.PublicUseBudgetDetail.as_view(), name='public-use-budget-detail'),
     path('confidential-data-result/', views.ConfidentialDataResultList.as_view(), name='confidential-data-result-list'),
     path('confidential-data-result/<int:pk>/', views.ConfidentialDataResultDetail.as_view(), name='confidential-data-result-detail'),
+    path('confidential-data-run/', views.ConfidentialDataResultList.as_view(), name='confidential-data-result-list'),
+    path('confidential-data-run/<int:pk>/', views.ConfidentialDataResultDetail.as_view(), name='confidential-data-result-detail'),
     path('synthetic-data-result/', views.SyntheticDataResultList.as_view(), name='synthetic-data-result-list'),
-    path('synthetic-data-result/<int:pk>/', views.SyntheticDataResultDetail.as_view(), name='synthetic-data-result-detail')
+    path('synthetic-data-result/<int:pk>/', views.SyntheticDataResultDetail.as_view(), name='synthetic-data-result-detail'),
+    path('synthetic-data-run/', views.SyntheticDataResultList.as_view(), name='synthetic-data-result-list'),
+    path('synthetic-data-run/<int:pk>/', views.SyntheticDataResultDetail.as_view(), name='synthetic-data-result-detail')
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

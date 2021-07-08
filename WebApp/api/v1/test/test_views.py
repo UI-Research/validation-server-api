@@ -12,7 +12,7 @@ import factory
 
 fake = Faker()
 
-class TestRunListTestCase(APITestCase):
+class TestCommandListTestCase(APITestCase):
     """ 
     Tests /api/v1/command list operations 
     """

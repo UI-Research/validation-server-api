@@ -45,7 +45,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SyntheticDataResult',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('run_id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('result', models.JSONField()),
                 ('privacy_budget_used', models.DecimalField(decimal_places=2, default=0, max_digits=10)),
                 ('command_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='v1.command')),
@@ -54,7 +54,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SyntheticDataRun',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('run_id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('epsilon', models.DecimalField(decimal_places=2, max_digits=5)),
                 ('date_time_run_submitted', models.DateTimeField(auto_now_add=True)),
                 ('command_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='v1.command')),

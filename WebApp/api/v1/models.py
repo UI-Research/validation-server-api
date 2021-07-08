@@ -21,11 +21,13 @@ class Command(models.Model):
 
 class SyntheticDataRun(models.Model):
     command_id = models.ForeignKey(Command, on_delete=models.CASCADE)
+    run_id = models.AutoField(primary_key=True)
     epsilon = models.DecimalField(decimal_places=2, max_digits=5)
     date_time_run_submitted = models.DateTimeField(auto_now_add=True)
 
 class SyntheticDataResult(models.Model):
     command_id = models.ForeignKey(Command, on_delete=models.CASCADE)
+    run_id = models.AutoField(primary_key=True)
     result = models.JSONField()
     privacy_budget_used = models.DecimalField(decimal_places=2, max_digits=10, null=False, default=0)
 

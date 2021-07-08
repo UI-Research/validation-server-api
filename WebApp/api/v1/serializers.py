@@ -18,6 +18,7 @@ class SyntheticDataRunSerializer(serializers.ModelSerializer):
         model = Command
         fields = [
             "command_id",
+            "run_id",
             "epsilon", 
             "date_time_run_submitted"
             ]
@@ -27,6 +28,7 @@ class SyntheticDataResultSerializer(serializers.ModelSerializer):
         model = SyntheticDataResult
         fields = [
             "command_id",
+            "run_id",
             "result",
             "privacy_budget_used"
         ]

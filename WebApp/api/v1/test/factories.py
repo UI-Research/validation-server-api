@@ -32,4 +32,4 @@ class CommandFactory(factory.django.DjangoModelFactory):
   
     researcher_id = factory.SubFactory(UserFactory)
     command_type = 1
-    sanitized_run_input = factory.Dict( {'command':['test'],}, dict_factory=JSONFactory)
+    sanitized_command_input = factory.Dict( {'command':['test'],}, dict_factory=JSONFactory)
