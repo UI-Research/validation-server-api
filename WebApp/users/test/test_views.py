@@ -6,7 +6,7 @@ from rest_framework import status
 from faker import Faker
 import factory
 from ..models import User
-from WebApp.api.v1.models import Budget
+from WebApp.api.v1.models import ReviewAndRefinementBudget, PublicUseBudget
 from .factories import UserFactory
 
 fake = Faker()
@@ -33,9 +33,14 @@ class TestUserListTestCase(APITestCase):
         eq_(user.username, self.user_data.get('username'))
         ok_(check_password(self.user_data.get('password'), user.password))
 
-    def test_post_request_triggers_budget_record(self):
+    def test_post_request_triggers_review_and_refinement_budget_record(self):
         self.user = UserFactory()
-        budget_record = Budget.objects.get(pk=self.user.pk)
+        budget_record = ReviewAndRefinementBudget.objects.get(pk=self.user.pk)
+        eq_(budget_record.researcher_id, self.user)
+
+    def test_post_request_triggers_public_use_budget_record(self):
+        self.user = UserFactory()
+        budget_record = PublicUseBudget.objects.get(pk=self.user.pk)
         eq_(budget_record.researcher_id, self.user)
 
 class TestUserDetailTestCase(APITestCase):
