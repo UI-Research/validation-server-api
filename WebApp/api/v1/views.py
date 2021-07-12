@@ -90,31 +90,6 @@ class PublicUseBudgetDetail(generics.RetrieveUpdateDestroyAPIView):
         
         return Response(serializer.data)
 
-class PublicUseBudgetDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = PublicUseBudget.objects.all()
-    serializer_class = PublicUseBudgetSerializer
-
-    def update(self, request, *args, **kwargs):
-        # http://www.cdrf.co/3.1/rest_framework.generics/RetrieveUpdateDestroyAPIView.html
-        instance = self.get_object()
-        
-        total_budget_used = instance.total_budget_used
-        total_budget_allocated = instance.total_budget_allocated
-
-        budget_used = float(request.data.get("privacy_budget_used"))
-        total_budget_used = float(total_budget_used) + budget_used
-
-        data = request.data.copy()
-        data["total_budget_used"] = total_budget_used
-        
-        # TODO: validate
-
-        serializer = self.get_serializer(instance, data=data, partial=True)
-        serializer.is_valid(raise_exception = True)
-        self.perform_update(serializer)
-        
-        return Response(serializer.data)
-
 class ConfidentialDataResultList(generics.ListCreateAPIView):
     queryset = ConfidentialDataResult.objects.all()
     serializer_class = ConfidentialDataResultSerializer
@@ -124,6 +99,14 @@ class ConfidentialDataResultDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = ConfidentialDataResult.objects.all()
     serializer_class = ConfidentialDataResultSerializer
 
+class ConfidentialDataRunList(generics.ListCreateAPIView):
+    queryset = ConfidentialDataRun.objects.all()
+    serializer_class = ConfidentialDataRunSerializer
+    
+
+class ConfidentialDataRunDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = ConfidentialDataRun.objects.all()
+    serializer_class = ConfidentialDataRunSerializer
 
 class SyntheticDataResultList(generics.ListCreateAPIView):
     queryset = SyntheticDataResult.objects.all()
@@ -133,3 +116,12 @@ class SyntheticDataResultList(generics.ListCreateAPIView):
 class SyntheticDataResultDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = SyntheticDataResult.objects.all()
     serializer_class = SyntheticDataResultSerializer
+
+class SyntheticDataRunList(generics.ListCreateAPIView):
+    queryset = SyntheticDataRun.objects.all()
+    serializer_class = SyntheticDataRunSerializer
+    
+
+class SyntheticDataRunDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = SyntheticDataRun.objects.all()
+    serializer_class = SyntheticDataRunSerializer
