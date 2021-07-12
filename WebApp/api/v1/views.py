@@ -47,7 +47,7 @@ class ReviewAndRefinementBudgetDetail(generics.RetrieveUpdateDestroyAPIView):
         total_budget_used = instance.total_budget_used
         total_budget_allocated = instance.total_budget_allocated
 
-        budget_used = float(request.data.get("budget_used"))
+        budget_used = float(request.data.get("privacy_budget_used"))
         total_budget_used = float(total_budget_used) + budget_used
 
         data = request.data.copy()
@@ -76,7 +76,7 @@ class PublicUseBudgetDetail(generics.RetrieveUpdateDestroyAPIView):
         total_budget_used = instance.total_budget_used
         total_budget_allocated = instance.total_budget_allocated
 
-        budget_used = float(request.data.get("budget_used"))
+        budget_used = float(request.data.get("privacy_budget_used"))
         total_budget_used = float(total_budget_used) + budget_used
 
         data = request.data.copy()

@@ -57,13 +57,13 @@ class TestPublicUseBudgetDetailTestCase(APITestCase):
         self.client.force_authenticate(user = self.user, token = self.user.auth_token)
 
     def test_put_request_updates_budget(self):
-        payload = {'total_budget_allocated': '100.00', 'budget_used': '25.00'}
+        payload = {'total_budget_allocated': '100.00', 'privacy_budget_used': '25.00'}
         response = self.client.put(self.url, payload)
         eq_(response.status_code, status.HTTP_200_OK)
         eq_(response.data["total_budget_used"], "25.00")
 
     def test_put_request_validates_budget(self):
-        payload = {'total_budget_allocated': '100.00', 'budget_used': '250.00'}
+        payload = {'total_budget_allocated': '100.00', 'privacy_budget_used': '250.00'}
         response = self.client.put(self.url, payload)
         eq_(response.status_code, status.HTTP_400_BAD_REQUEST)
 
