@@ -1,60 +1,91 @@
 from rest_framework import serializers
-from WebApp.api.v1.models import Run, IntermediateBudget, Budget, Results
+from WebApp.api.v1.models import Command, SyntheticDataRun, SyntheticDataResult
+from WebApp.api.v1.models import ConfidentialDataRun, ConfidentialDataResult
+from WebApp.api.v1.models import ReviewAndRefinementBudget, PublicUseBudget
 
-class RunSerializer(serializers.ModelSerializer):
+class CommandSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Run
+        model = Command
         fields = [
-            "run_id", 
             "researcher_id", 
-            "run_type", 
-            "sanitized_run_input", 
-            "display_results_decision", 
-            "display_results_number",
+            "command_id",
+            "command_type", 
+            "sanitized_command_input"
+            ]
+
+class SyntheticDataRunSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Command
+        fields = [
+            "command_id",
+            "run_id",
+            "epsilon", 
             "date_time_run_submitted"
             ]
 
-            
-class BudgetSerializer(serializers.ModelSerializer):
-
-    def validate(self, data):
-        if data["total_budget_used"] > data["total_budget_allocated"]:
-            raise serializers.ValidationError("Cannot exceed budget allocation")
-
-        return data
-
+class SyntheticDataResultSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Budget
+        model = SyntheticDataResult
         fields = [
-            "researcher_id",
-            "total_budget_allocated",
-            "total_budget_used"
-        ]
-
-class IntermediateBudgetSerializer(serializers.ModelSerializer):
-
-    def validate(self, data):
-        if data["total_budget_used"] > data["total_budget_allocated"]:
-            raise serializers.ValidationError("Cannot exceed budget allocation")
-
-        return data
-
-    class Meta:
-        model = Budget
-        fields = [
-            "researcher_id",
-            "total_budget_allocated",
-            "total_budget_used"
-        ]
-
-class ResultsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Results
-        fields = [
-            "result_id",
+            "command_id",
             "run_id",
-            "researcher_id",
             "result",
-            "return_to_researcher",
-            "budget_used"
+            "privacy_budget_used"
         ]
+
+
+class ConfidentialDataRunSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Command
+        fields = [
+            "command_id",
+            "run_id",
+            "epsilon", 
+            "date_time_run_submitted"
+            ]
+
+class ConfidentialDataResultSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ConfidentialDataResult
+        fields = [
+            "command_id",
+            "run_id",
+            "result",
+            "display_results_decision",
+            "release_results_decision",
+            "privacy_budget_used"
+        ]
+
+            
+class ReviewAndRefinementBudgetSerializer(serializers.ModelSerializer):
+
+    def validate(self, data):
+        if data["total_budget_used"] > data["total_budget_allocated"]:
+            raise serializers.ValidationError("Cannot exceed budget allocation")
+
+        return data
+
+    class Meta:
+        model = ReviewAndRefinementBudget
+        fields = [
+            "researcher_id",
+            "total_budget_allocated",
+            "total_budget_used"
+        ]
+
+class PublicUseBudgetSerializer(serializers.ModelSerializer):
+
+    def validate(self, data):
+        if data["total_budget_used"] > data["total_budget_allocated"]:
+            raise serializers.ValidationError("Cannot exceed budget allocation")
+
+        return data
+
+    class Meta:
+        model = PublicUseBudget
+        fields = [
+            "researcher_id",
+            "total_budget_allocated",
+            "total_budget_used"
+        ]
+

@@ -1,5 +1,5 @@
 import factory
-from ..models import Run, Budget
+from ..models import Command
 from WebApp.users.test.factories import UserFactory
 import json
 
@@ -25,11 +25,11 @@ class JSONFactory(factory.DictFactory):
 #    groups.add(Group.objects.get(name='Researcher'))
 
 
-class RunFactory(factory.django.DjangoModelFactory):
+class CommandFactory(factory.django.DjangoModelFactory):
 
     class Meta:
-        model = Run
+        model = Command
   
     researcher_id = factory.SubFactory(UserFactory)
-    run_type = 1
-    sanitized_run_input = factory.Dict( {'run':['test'],}, dict_factory=JSONFactory)
+    command_type = 1
+    sanitized_command_input = factory.Dict( {'command':['test'],}, dict_factory=JSONFactory)

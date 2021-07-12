@@ -252,7 +252,7 @@ fi
 echo "-----------------------------------------------------"
 echo "Export mysql data"
 echo "-----------------------------------------------------"
-docker exec web python manage.py dumpdata --output mydata.json
+docker exec web python manage.py dumpdata users --output mydata.json
 
 
 #exit 1 # terminate and indicate error
@@ -305,7 +305,7 @@ if [ -f "./docker-compose.yml" ]; then
       echo "-----------------------------------------------------"
       echo "Create superuser"
       echo "-----------------------------------------------------"
-      docker exec -tt web python manage.py createsuperuser --noinput
+      #docker exec -tt web python manage.py createsuperuser --noinput
 
       echo "-----------------------------------------------------"
       echo "Create static files"

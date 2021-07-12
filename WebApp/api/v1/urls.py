@@ -3,14 +3,20 @@ from WebApp.api.v1 import views
 from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
-    path('runs/', views.RunList.as_view(), name='run-list'),
-    path('runs/<int:pk>/', views.RunDetail.as_view(), name='run-detail'),
-    path('budget/', views.BudgetList.as_view(), name='budget-list'),
-    path('budget/<int:pk>/', views.BudgetDetail.as_view(), name='budget-detail'),
-    path('intermediate-budget/', views.IntermediateBudgetList.as_view(), name='intermediate-budget-list'),
-    path('intermediate-budget/<int:pk>/', views.IntermediateBudgetDetail.as_view(), name='intermediate-budget-detail'),
-    path('result/', views.ResultList.as_view(), name='result-list'),
-    path('result/<int:pk>/', views.ResultDetail.as_view(), name='result-detail')
+    path('command/', views.CommandList.as_view(), name='command-list'),
+    path('command/<int:pk>/', views.CommandDetail.as_view(), name='command-detail'),
+    path('review-and-refinement-budget/', views.ReviewAndRefinementBudgetList.as_view(), name='review-and-refinement-budget-list'),
+    path('review-and-refinement-budget/<int:pk>/', views.ReviewAndRefinementBudgetDetail.as_view(), name='review-and-refinement-budget-detail'),
+    path('public-use-budget/', views.PublicUseBudgetList.as_view(), name='public-use-budget-list'),
+    path('public-use-budget/<int:pk>/', views.PublicUseBudgetDetail.as_view(), name='public-use-budget-detail'),
+    path('confidential-data-result/', views.ConfidentialDataResultList.as_view(), name='confidential-data-result-list'),
+    path('confidential-data-result/<int:pk>/', views.ConfidentialDataResultDetail.as_view(), name='confidential-data-result-detail'),
+    path('confidential-data-run/', views.ConfidentialDataResultList.as_view(), name='confidential-data-result-list'),
+    path('confidential-data-run/<int:pk>/', views.ConfidentialDataResultDetail.as_view(), name='confidential-data-result-detail'),
+    path('synthetic-data-result/', views.SyntheticDataResultList.as_view(), name='synthetic-data-result-list'),
+    path('synthetic-data-result/<int:pk>/', views.SyntheticDataResultDetail.as_view(), name='synthetic-data-result-detail'),
+    path('synthetic-data-run/', views.SyntheticDataResultList.as_view(), name='synthetic-data-result-list'),
+    path('synthetic-data-run/<int:pk>/', views.SyntheticDataResultDetail.as_view(), name='synthetic-data-result-detail')
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
