@@ -15,7 +15,7 @@ class CommandSerializer(serializers.ModelSerializer):
 
 class SyntheticDataRunSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Command
+        model = SyntheticDataRun
         fields = [
             "command_id",
             "run_id",
@@ -36,7 +36,7 @@ class SyntheticDataResultSerializer(serializers.ModelSerializer):
 
 class ConfidentialDataRunSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Command
+        model = ConfidentialDataRun
         fields = [
             "command_id",
             "run_id",
