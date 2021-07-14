@@ -62,8 +62,12 @@ class ReviewAndRefinementBudgetSerializer(serializers.ModelSerializer):
     def validate(self, data):
         if data["total_budget_used"] > data["total_budget_allocated"]:
             raise serializers.ValidationError("Cannot exceed budget allocation")
-
         return data
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['total_budget_available'] = instance.total_budget_allocated - instance.total_budget_used
+        return representation
 
     class Meta:
         model = ReviewAndRefinementBudget
@@ -78,8 +82,12 @@ class PublicUseBudgetSerializer(serializers.ModelSerializer):
     def validate(self, data):
         if data["total_budget_used"] > data["total_budget_allocated"]:
             raise serializers.ValidationError("Cannot exceed budget allocation")
-
         return data
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['total_budget_available'] = instance.total_budget_allocated - instance.total_budget_used
+        return representation
 
     class Meta:
         model = PublicUseBudget
