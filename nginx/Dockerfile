@@ -1,4 +1,6 @@
 FROM nginx:1.15-alpine
+ARG NGINX_PASSWORD
+ARG NGINX_USER
 
 # create sites-enabled -- not in alpine/nginx
 ADD sites-enabled/ /etc/nginx/sites-enabled
@@ -14,7 +16,7 @@ RUN apk update && apk add nano bash apache2-utils openssl
 
 # add user
 RUN mkdir /etc/apache2/
-RUN htpasswd -bcim /etc/apache2/.htpasswd synthuser ${NGINX_PASSWORD}
+RUN htpasswd -bc /etc/apache2/.htpasswd $NGINX_USER $NGINX_PASSWORD
 
 # Generating signing SSL private key
 RUN openssl genrsa -des3 -passout pass:urban1234 -out key.pem 2048
