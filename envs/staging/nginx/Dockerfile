@@ -11,5 +11,8 @@ RUN mkdir /etc/nginx/ssl
 COPY ssl/ /etc/nginx/ssl/
 
 # add packages not available in Alpine
-RUN apk update && apk add nano
-RUN apk update && apk add bash
+RUN apk update && apk add nano bash apache2-utils
+
+# add user
+RUN mkdir /etc/apache2/
+RUN htpasswd -bcim /etc/apache2/.htpasswd synthuser ${NGINX_PASSWORD}

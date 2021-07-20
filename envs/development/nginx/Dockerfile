@@ -8,14 +8,13 @@ COPY nginx.conf  /etc/nginx/
 
 # create SSL dir for certs
 RUN mkdir /etc/nginx/ssl
-RUN ls -lsat /etc/nginx/ssl
 
 # add packages not available in Alpine
-RUN apk update && apk add nano
-RUN apk update && apk add bash
+RUN apk update && apk add nano bash apache2-utils openssl
 
-# Install Open SSL and create self-signed certs
-RUN apk update && apk add -y openssl
+# add user
+RUN mkdir /etc/apache2/
+RUN htpasswd -bcim /etc/apache2/.htpasswd synthuser ${NGINX_PASSWORD}
 
 # Generating signing SSL private key
 RUN openssl genrsa -des3 -passout pass:urban1234 -out key.pem 2048
