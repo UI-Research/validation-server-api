@@ -5,6 +5,7 @@ services:
     container_name: proxy
     restart: always
     build: ./nginx/
+    env_file: .env
     ports:
       - "80:80"
       - "443:443"
