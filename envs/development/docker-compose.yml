@@ -4,7 +4,11 @@ services:
   nginx:
     container_name: proxy
     restart: always
-    build: ./nginx/
+    build: 
+      context: ./nginx/
+      args: 
+        NGINX_PASSWORD: ${NGINX_PASSWORD}
+        NGINX_USER: ${NGINX_USER}
     env_file: .env
     ports:
       - "80:80"
