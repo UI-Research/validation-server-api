@@ -15,4 +15,4 @@ RUN apk update && apk add nano bash apache2-utils
 
 # add user
 RUN mkdir /etc/apache2/
-RUN htpasswd -bcim /etc/apache2/.htpasswd ${NGINX_USER} ${NGINX_PASSWORD}
+RUN htpasswd -bcim /etc/apache2/.htpasswd synthuser ${NGINX_PASSWORD}
