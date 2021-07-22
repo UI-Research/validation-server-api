@@ -12,11 +12,7 @@ COPY nginx.conf  /etc/nginx/
 RUN mkdir /etc/nginx/ssl
 
 # add packages not available in Alpine
-RUN apk update && apk add nano bash apache2-utils openssl
-
-# add user
-RUN mkdir /etc/apache2/
-RUN htpasswd -bc /etc/apache2/.htpasswd $NGINX_USER $NGINX_PASSWORD
+RUN apk update && apk add nano bash openssl
 
 # Generating signing SSL private key
 RUN openssl genrsa -des3 -passout pass:urban1234 -out key.pem 2048
