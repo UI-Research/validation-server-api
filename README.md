@@ -109,7 +109,7 @@ from the admin panel.
 ```python
 import requests
 
-token = "Token [YOUR TOKEN HERE]"
+token = "[YOUR TOKEN HERE]"
 headers = {"Authorization": f"Token {token}"}
 
 r = requests.get("http://0.0.0.0:8000/api/v1/runs/", headers = headers)
