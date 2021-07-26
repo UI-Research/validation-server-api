@@ -43,19 +43,7 @@ MYSQL_PASSWORD=***REMOVED***
 Build your containers:
 
 ```bash
-docker-compose build
-```
-
-Then start the dev server for local development:
-
-```bash
-docker-compose up
-```
-
-or to run in the background
-
-```bash
-docker-compose up -d
+./deploy.sh -e development
 ```
 
 If you have made changes to your models, make and apply the new migrations.
