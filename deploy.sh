@@ -217,8 +217,7 @@ echo "copying nginx files for $environment "
 echo "-----------------------------------------------------"
 
 echo "Loading $environment scripts"
-cp -fr ./envs/$environment/nginx/sites-enabled ./nginx/
-cp -fr ./envs/$environment/nginx/Dockerfile ./nginx/Dockerfile
+cp -fr ./envs/$environment/nginx/ .
 cp -fr ./envs/$environment/docker-compose.yml ./docker-compose.yml
 cp -fr ./envs/$environment/requirements.txt ./requirements.txt
 cp -fr ./envs/$environment/nginx/ssl ./nginx/
