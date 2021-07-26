@@ -15,7 +15,7 @@ echo "Starting build:  $(date)"
 echo "-----------------------------------------------------"
 SECONDS=0
 
-while getopts "e:m:r:d:i:c:" option; do
+while getopts "e:m:r:d:i:c:o:" option; do
   case $option in
     e ) env=$OPTARG
     ;;
