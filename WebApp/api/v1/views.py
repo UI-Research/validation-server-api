@@ -21,10 +21,10 @@ class CommandList(generics.ListCreateAPIView):
     def get_queryset(self, *args, **kwargs):
         return Command.objects.all().filter(researcher_id=self.request.user).order_by('-command_id')
 
-    def perform_create(self, serializer):
-        instance = serializer.save()
-        Backend.send_request(instance.run_id)
-        return Response(serializer.data)  
+    # def perform_create(self, serializer):
+    #     instance = serializer.save()
+    #     Backend.send_request(instance.command_id)
+    #     return Response(serializer.data)  
 
 class CommandDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated, IsOwnerOrNoAccess]
