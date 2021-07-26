@@ -1,4 +1,6 @@
 FROM nginx:1.15-alpine
+ARG NGINX_PASSWORD
+ARG NGINX_USER
 
 # create sites-enabled -- not in alpine/nginx
 ADD sites-enabled/ /etc/nginx/sites-enabled
@@ -8,14 +10,9 @@ COPY nginx.conf  /etc/nginx/
 
 # create SSL dir for certs
 RUN mkdir /etc/nginx/ssl
-RUN ls -lsat /etc/nginx/ssl
 
 # add packages not available in Alpine
-RUN apk update && apk add nano
-RUN apk update && apk add bash
-
-# Install Open SSL and create self-signed certs
-RUN apk update && apk add -y openssl
+RUN apk update && apk add nano bash openssl
 
 # Generating signing SSL private key
 RUN openssl genrsa -des3 -passout pass:urban1234 -out key.pem 2048
