@@ -1,4 +1,6 @@
-# django-rest-template
+# validation-server-api
+
+### django-rest-template
 
 [![Build Status](https://travis-ci.org/Urban Institute/django-rest-template.svg?branch=master)](https://travis-ci.org/Urban Institute/django-rest-template)
 [![Built with](https://img.shields.io/badge/Built_with-Cookiecutter_Django_Rest-F7B633.svg)](https://github.com/agconti/cookiecutter-django-rest)
@@ -14,7 +16,7 @@ repository for more detail.
 
 ### Staging Server
 
-* Front End Site: `https://validation-server-stg.urban.org`
+* Front End Site (requires log-in): `https://validation-server-stg.urban.org`
 
 * API (requires log-in): `https://validation-server-stg.urban.org/api/v1/`
 
@@ -23,6 +25,7 @@ repository for more detail.
     - `https://validation-server-stg.urban.org/api/swagger.[json | yaml]`
     - `https://validation-server-stg.urban.org/api/redoc/`
 
+### API Usage
 ### Local Development
 
 ** FOR LOCAL TESTING PURPOSES ONLY **
@@ -40,19 +43,7 @@ MYSQL_PASSWORD=sa_password
 Build your containers:
 
 ```bash
-docker-compose build
-```
-
-Then start the dev server for local development:
-
-```bash
-docker-compose up
-```
-
-or to run in the background
-
-```bash
-docker-compose up -d
+./deploy.sh -e development
 ```
 
 If you have made changes to your models, make and apply the new migrations.
@@ -106,7 +97,7 @@ from the admin panel.
 ```python
 import requests
 
-token = "Token [YOUR TOKEN HERE]"
+token = "[YOUR TOKEN HERE]"
 headers = {"Authorization": f"Token {token}"}
 
 r = requests.get("http://0.0.0.0:8000/api/v1/runs/", headers = headers)

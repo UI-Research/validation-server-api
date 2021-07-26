@@ -15,7 +15,7 @@ echo "Starting build:  $(date)"
 echo "-----------------------------------------------------"
 SECONDS=0
 
-while getopts "e:m:r:d:i:c:" option; do
+while getopts "e:m:r:d:i:c:o:" option; do
   case $option in
     e ) env=$OPTARG
     ;;
@@ -217,8 +217,7 @@ echo "copying nginx files for $environment "
 echo "-----------------------------------------------------"
 
 echo "Loading $environment scripts"
-cp -fr ./envs/$environment/nginx/sites-enabled ./nginx/
-cp -fr ./envs/$environment/nginx/Dockerfile ./nginx/Dockerfile
+cp -fr ./envs/$environment/nginx/ .
 cp -fr ./envs/$environment/docker-compose.yml ./docker-compose.yml
 cp -fr ./envs/$environment/requirements.txt ./requirements.txt
 cp -fr ./envs/$environment/nginx/ssl ./nginx/
