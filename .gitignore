@@ -105,3 +105,8 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# development
+mydata.json
+docker-compose.yml
+nginx/

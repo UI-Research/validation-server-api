@@ -17,7 +17,7 @@ class Command(models.Model):
     sanitized_command_input = models.JSONField()
 
     def __str__(self):
-        return f"Run_{self.command_id}"
+        return f"Command_{self.command_id}"
 
 class SyntheticDataRun(models.Model):
     command_id = models.ForeignKey(Command, on_delete=models.CASCADE)
@@ -25,9 +25,12 @@ class SyntheticDataRun(models.Model):
     epsilon = models.DecimalField(decimal_places=2, max_digits=5)
     date_time_run_submitted = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"Run_{self.run_id}"
+
 class SyntheticDataResult(models.Model):
     command_id = models.ForeignKey(Command, on_delete=models.CASCADE)
-    run_id = models.AutoField(primary_key=True)
+    run_id = models.OneToOneField(SyntheticDataRun, primary_key = True, on_delete=models.CASCADE)
     result = models.JSONField()
     privacy_budget_used = models.DecimalField(decimal_places=2, max_digits=10, null=False, default=0)
 
@@ -37,9 +40,12 @@ class ConfidentialDataRun(models.Model):
     epsilon = models.DecimalField(decimal_places=2, max_digits=5)
     date_time_run_submitted = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"Run_{self.run_id}"
+
 class ConfidentialDataResult(models.Model):
     command_id = models.ForeignKey(Command, on_delete=models.CASCADE)
-    run_id = models.AutoField(primary_key=True)
+    run_id = models.OneToOneField(ConfidentialDataRun, primary_key=True, on_delete=models.CASCADE)
     result = models.JSONField()
     display_results_decision = models.BooleanField(default=False)
     release_results_decision = models.BooleanField(default=False)
