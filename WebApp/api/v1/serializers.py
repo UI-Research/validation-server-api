@@ -33,7 +33,6 @@ class SyntheticDataResultSerializer(serializers.ModelSerializer):
             "privacy_budget_used"
         ]
 
-
 class ConfidentialDataRunSerializer(serializers.ModelSerializer):
     class Meta:
         model = ConfidentialDataRun
@@ -56,7 +55,6 @@ class ConfidentialDataResultSerializer(serializers.ModelSerializer):
             "privacy_budget_used"
         ]
 
-            
 class ReviewAndRefinementBudgetSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
