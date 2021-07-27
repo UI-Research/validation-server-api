@@ -13,6 +13,7 @@ class Command(models.Model):
 
     researcher_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     command_id = models.AutoField(primary_key=True)
+    command_name = models.CharField(max_length=100, default="Command_title")
     command_type = models.IntegerField(choices=COMMAND_TYPE_CHOICES)
     sanitized_command_input = models.JSONField()
 
