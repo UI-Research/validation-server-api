@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.validators import UniqueTogetherValidator
 from WebApp.api.v1.models import Command, SyntheticDataRun, SyntheticDataResult
 from WebApp.api.v1.models import ConfidentialDataRun, ConfidentialDataResult
 from WebApp.api.v1.models import ReviewAndRefinementBudget, PublicUseBudget
@@ -10,8 +11,17 @@ class CommandSerializer(serializers.ModelSerializer):
             "researcher_id", 
             "command_id",
             "command_type", 
+            "command_name",
             "sanitized_command_input"
             ]
+        validators = [
+            UniqueTogetherValidator(
+                queryset=Command.objects.all(),
+                fields=['researcher_id', 'command_name']
+            )
+        ]
+
+
 
 class SyntheticDataRunSerializer(serializers.ModelSerializer):
     class Meta:
