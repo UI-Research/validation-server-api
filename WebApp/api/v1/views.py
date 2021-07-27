@@ -8,7 +8,7 @@ from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from WebApp.api.v1.permissions import IsOwnerOrNoAccess
+from WebApp.api.v1.permissions import IsAdministrator, IsOwnerOrNoAccess, IsAdminOrReadOnly
 from WebApp.api.v1.backend import Backend
 
 class CommandList(generics.ListCreateAPIView):
@@ -33,13 +33,16 @@ class CommandDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class ReviewAndRefinementBudgetList(generics.ListCreateAPIView):
+    permission_classes = [IsAuthenticated, IsAdministrator]
     queryset = ReviewAndRefinementBudget.objects.all()
     serializer_class = ReviewAndRefinementBudgetSerializer
+
 
 class ReviewAndRefinementBudgetDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated, IsOwnerOrNoAccess, IsAdminOrReadOnly]
     queryset = ReviewAndRefinementBudget.objects.all()
     serializer_class = ReviewAndRefinementBudgetSerializer
-
+        
     def update(self, request, *args, **kwargs):
         # http://www.cdrf.co/3.1/rest_framework.generics/RetrieveUpdateDestroyAPIView.html
         instance = self.get_object()
@@ -62,10 +65,12 @@ class ReviewAndRefinementBudgetDetail(generics.RetrieveUpdateDestroyAPIView):
         return Response(serializer.data)
 
 class PublicUseBudgetList(generics.ListCreateAPIView):
+    permission_classes = [IsAuthenticated, IsAdministrator]
     queryset = PublicUseBudget.objects.all()
     serializer_class = PublicUseBudgetSerializer
 
 class PublicUseBudgetDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated, IsOwnerOrNoAccess, IsAdminOrReadOnly]
     queryset = PublicUseBudget.objects.all()
     serializer_class = PublicUseBudgetSerializer
 
