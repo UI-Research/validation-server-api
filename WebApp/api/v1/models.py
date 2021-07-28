@@ -32,6 +32,12 @@ class SyntheticDataRun(models.Model):
     def __str__(self):
         return f"Run_{self.run_id}"
 
+@receiver(post_save, sender=Command)
+def create_synthetic_data_run(sender, instance, created, **kwargs):
+    if created:
+        SyntheticDataRun.objects.create(command_id=instance, epsilon=0.5)
+
+
 class SyntheticDataResult(models.Model):
     command_id = models.ForeignKey(Command, on_delete=models.CASCADE, db_column='command_id')
     run_id = models.OneToOneField(SyntheticDataRun, primary_key = True, on_delete=models.CASCADE, db_column='run_id')
