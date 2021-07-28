@@ -13,13 +13,16 @@ from WebApp.api.v1.backend import Backend
 
 class CommandList(generics.ListCreateAPIView):
     """
-    List all runs, create a new run instance
+    List all commands, create a new command instance
     """
     permission_classes = [IsAuthenticated, IsOwnerOrNoAccess]
     serializer_class = CommandSerializer
 
     def get_queryset(self, *args, **kwargs):
-        return Command.objects.all().filter(researcher_id=self.request.user).order_by('-command_id')
+        return Command.objects.all().filter(researcher=self.request.user).order_by('-command_id')
+
+    def perform_create(self, serializer):
+        serializer.save(researcher=self.request.user)
 
     # def perform_create(self, serializer):
     #     instance = serializer.save()
@@ -30,7 +33,6 @@ class CommandDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated, IsOwnerOrNoAccess]
     queryset = Command.objects.all()
     serializer_class = CommandSerializer
-
 
 class ReviewAndRefinementBudgetList(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated, IsAdministrator]

@@ -1,28 +1,15 @@
 from rest_framework import serializers
-from rest_framework.validators import UniqueTogetherValidator
+from django.db.models import Q
 from WebApp.api.v1.models import Command, SyntheticDataRun, SyntheticDataResult
 from WebApp.api.v1.models import ConfidentialDataRun, ConfidentialDataResult
 from WebApp.api.v1.models import ReviewAndRefinementBudget, PublicUseBudget
 
 class CommandSerializer(serializers.ModelSerializer):
+    researcher = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
     class Meta:
         model = Command
-        fields = [
-            "researcher_id", 
-            "command_id",
-            "command_type", 
-            "command_name",
-            "sanitized_command_input"
-            ]
-        validators = [
-            UniqueTogetherValidator(
-                queryset=Command.objects.all(),
-                fields=['researcher_id', 'command_name']
-            )
-        ]
-
-
-
+        fields = '__all__'
+ 
 class SyntheticDataRunSerializer(serializers.ModelSerializer):
     class Meta:
         model = SyntheticDataRun
