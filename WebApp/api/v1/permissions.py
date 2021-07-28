@@ -5,7 +5,7 @@ class IsOwnerOrNoAccess(permissions.BasePermission):
     Object-level permission to only allow owners of an object to view it.
     """
     def has_object_permission(self, request, view, obj):
-        return obj.researcher == request.user
+        return obj.researcher_id == request.user
 
 class IsAdminOrReadOnly(permissions.BasePermission):
     """
