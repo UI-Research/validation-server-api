@@ -5,7 +5,7 @@ from WebApp.api.v1.models import ConfidentialDataRun, ConfidentialDataResult
 from WebApp.api.v1.models import ReviewAndRefinementBudget, PublicUseBudget
 
 class CommandSerializer(serializers.ModelSerializer):
-    researcher = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
+    researcher_id = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
     class Meta:
         model = Command
         fields = '__all__'
