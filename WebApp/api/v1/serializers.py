@@ -9,7 +9,8 @@ class CommandSerializer(serializers.ModelSerializer):
     class Meta:
         model = Command
         fields = '__all__'
- 
+
+
 class SyntheticDataRunSerializer(serializers.ModelSerializer):
     class Meta:
         model = SyntheticDataRun
