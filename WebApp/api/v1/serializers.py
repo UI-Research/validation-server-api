@@ -27,6 +27,7 @@ class SyntheticDataResultSerializer(serializers.ModelSerializer):
         fields = [
             "command_id",
             "run_id",
+            "accuracy",
             "result",
             "privacy_budget_used"
         ]
@@ -47,6 +48,7 @@ class ConfidentialDataResultSerializer(serializers.ModelSerializer):
         fields = [
             "command_id",
             "run_id",
+            "accuracy",
             "result",
             "display_results_decision",
             "release_results_decision",
