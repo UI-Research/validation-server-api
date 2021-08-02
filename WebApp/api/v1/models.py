@@ -41,6 +41,7 @@ def create_synthetic_data_run(sender, instance, created, **kwargs):
 class SyntheticDataResult(models.Model):
     command_id = models.ForeignKey(Command, on_delete=models.CASCADE, db_column='command_id')
     run_id = models.OneToOneField(SyntheticDataRun, primary_key = True, on_delete=models.CASCADE, db_column='run_id')
+    accuracy = models.JSONField()
     result = models.JSONField()
     privacy_budget_used = models.DecimalField(decimal_places=2, max_digits=10, null=False, default=0)
 
@@ -56,6 +57,7 @@ class ConfidentialDataRun(models.Model):
 class ConfidentialDataResult(models.Model):
     command_id = models.ForeignKey(Command, on_delete=models.CASCADE, db_column='command_id')
     run_id = models.OneToOneField(ConfidentialDataRun, primary_key=True, on_delete=models.CASCADE, db_column='run_id')
+    accuracy = models.JSONField()
     result = models.JSONField()
     display_results_decision = models.BooleanField(default=False)
     release_results_decision = models.BooleanField(default=False)
