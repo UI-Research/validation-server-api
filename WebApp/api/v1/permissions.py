@@ -1,12 +1,20 @@
 from rest_framework import permissions
 
-class IsOwnerOrNoAccess(permissions.BasePermission):
+class IsOwner(permissions.BasePermission):
     """ 
     Object-level permission to only allow owners of an object to view it.
     """
     def has_object_permission(self, request, view, obj):
         return obj.researcher_id == request.user
 
+# class IsAdminOrReadOnly(permissions.BasePermission):
+#     """
+#     The request is authenticated as admin, or is a read-only request.
+#     """
+#     def has_permission(self, request, view):
+#         if request.user and request.user.groups.filter(name='Administrator'):
+#             return True
+#         return False
 
 #class IsDataSteward(permissions.BasePermission):
 #    def has_permission(self, request, view):
@@ -14,12 +22,14 @@ class IsOwnerOrNoAccess(permissions.BasePermission):
 #            return True
 #        return False
 #
-#class IsAdministrator(permissions.BasePermission):
-#    def has_permission(self, request, view):
-#        if request.user and request.user.groups.filter(name='Administrator'):
-#            return True
-#        return False
-#    
+class IsAdministrator(permissions.BasePermission):
+    def has_permission(self, request, view):
+        if request.user and request.user.groups.filter(name='Administrators'):
+            return True
+        return False
+
+
+    
 #class IsResearcher(permissions.BasePermission):
 #    def has_permission(self, request, view):
 #        if request.user and request.user.groups.filter(name='Researcher'):

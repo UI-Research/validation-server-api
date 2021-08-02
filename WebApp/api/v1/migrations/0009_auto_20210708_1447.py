@@ -27,6 +27,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('run_id', models.AutoField(primary_key=True, serialize=False)),
                 ('result', models.JSONField()),
+                ('accuracy', models.JSONField()),
                 ('display_results_decision', models.BooleanField(default=False)),
                 ('release_results_decision', models.BooleanField(default=False)),
                 ('privacy_budget_used', models.DecimalField(decimal_places=2, default=0, max_digits=10)),
@@ -47,6 +48,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('run_id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('result', models.JSONField()),
+                ('accuracy', models.JSONField()),
                 ('privacy_budget_used', models.DecimalField(decimal_places=2, default=0, max_digits=10)),
                 ('command_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='v1.command')),
             ],
