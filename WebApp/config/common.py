@@ -23,6 +23,7 @@ class Common(Configuration):
         'django_filters',            # for filtering rest endpoints
         'import_export',             # for importing and exporting data
         'drf_yasg',                  # required for swagger
+        'corsheaders',
         
         # Your apps
         'WebApp.users',
@@ -32,9 +33,10 @@ class Common(Configuration):
 
     # https://docs.djangoproject.com/en/2.0/topics/http/middleware/
     MIDDLEWARE = (
+        'corsheaders.middleware.CorsMiddleware',
+        'django.middleware.common.CommonMiddleware',
         'django.middleware.security.SecurityMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
-        'django.middleware.common.CommonMiddleware',
         'django.middleware.csrf.CsrfViewMiddleware',
         'django.contrib.auth.middleware.AuthenticationMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
@@ -45,6 +47,9 @@ class Common(Configuration):
     ROOT_URLCONF = 'WebApp.urls'
     SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
     WSGI_APPLICATION = 'WebApp.wsgi.application'
+
+    #CORS
+    CORS_ALLOW_ALL_ORIGINS = True
 
     # Email
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
