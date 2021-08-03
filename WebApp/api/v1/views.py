@@ -42,7 +42,7 @@ class ReviewAndRefinementBudgetList(generics.ListCreateAPIView):
     def get_queryset(self, *args, **kwargs):
         return ReviewAndRefinementBudget.objects.all().filter(researcher_id=self.request.user)
 
-class ReviewAndRefinementBudgetDetail(generics.UpdateAPIView):
+class ReviewAndRefinementBudgetDetail(generics.RetrieveUpdateAPIView):
     permission_classes = [IsAuthenticated, IsAdministrator]
     serializer_class = ReviewAndRefinementBudgetSerializer
     queryset = ReviewAndRefinementBudget.objects.all()
@@ -75,7 +75,7 @@ class PublicUseBudgetList(generics.ListCreateAPIView):
     def get_queryset(self, *args, **kwargs):
         return PublicUseBudget.objects.all().filter(researcher_id=self.request.user)
 
-class PublicUseBudgetDetail(generics.UpdateAPIView):
+class PublicUseBudgetDetail(generics.RetrieveUpdateAPIView):
     permission_classes = [IsAuthenticated, IsAdministrator]
     serializer_class = PublicUseBudgetSerializer
     queryset = ReviewAndRefinementBudget.objects.all()
