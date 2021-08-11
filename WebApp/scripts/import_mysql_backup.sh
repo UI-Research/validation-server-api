@@ -4,7 +4,7 @@ echo "Import validation server api data from backup."
 echo $MYSQL_USER
 echo $MYSQL_PASSWORD
 echo $MYSQL_DATABASE
-mysql -u$MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE < /scripts/validation_server_api_backup.sql
+mysql -uroot -proot $MYSQL_DATABASE < ./scripts/validation_server_api_backup.sql
 echo "Finished validation server api data from backup."
 }
 

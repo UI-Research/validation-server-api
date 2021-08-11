@@ -111,3 +111,4 @@ mydata.json
 docker-compose.yml
 requirements.txt
 nginx/
+WebApp/api/v1/scripts/validation_server_api_backup.sql
