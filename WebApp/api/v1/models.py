@@ -3,7 +3,11 @@ from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from WebApp.users.models import User
+from WebApp.api.v1.utilities import trigger_smartnoise
 
+import boto3
+import json
+import os
 
 class Command(models.Model):
     COMMAND_TYPE_CHOICES = [
@@ -20,23 +24,21 @@ class Command(models.Model):
     class Meta:
         unique_together = [["command_name", "researcher_id"]]
 
-    def __str__(self):
-        return f"Command_{self.command_id}"
-
 class SyntheticDataRun(models.Model):
     command_id = models.ForeignKey(Command, on_delete=models.CASCADE, db_column='command_id')
     run_id = models.AutoField(primary_key=True)
     epsilon = models.DecimalField(decimal_places=2, max_digits=5)
     date_time_run_submitted = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return f"Run_{self.run_id}"
-
 @receiver(post_save, sender=Command)
 def create_synthetic_data_run(sender, instance, created, **kwargs):
     if created:
-        SyntheticDataRun.objects.create(command_id=instance, epsilon=0.5)
+        SyntheticDataRun.objects.create(command_id=instance, epsilon=1.0)
 
+@receiver(post_save, sender=SyntheticDataRun)
+def trigger_synthetic_data_run(sender, instance, created, **kwargs):
+    if created:
+        trigger_smartnoise(instance, confidential_query=False)
 
 class SyntheticDataResult(models.Model):
     command_id = models.ForeignKey(Command, on_delete=models.CASCADE, db_column='command_id')
@@ -51,8 +53,10 @@ class ConfidentialDataRun(models.Model):
     epsilon = models.DecimalField(decimal_places=2, max_digits=5)
     date_time_run_submitted = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return f"Run_{self.run_id}"
+@receiver(post_save, sender=ConfidentialDataRun)
+def trigger_synthetic_data_run(sender, instance, created, **kwargs):
+    if created:
+        trigger_smartnoise(instance, confidential_query=True)
 
 class ConfidentialDataResult(models.Model):
     command_id = models.ForeignKey(Command, on_delete=models.CASCADE, db_column='command_id')
@@ -82,4 +86,3 @@ class PublicUseBudget(models.Model):
 def create_public_use_budget(sender, instance, created, **kwargs):
     if created:
         PublicUseBudget.objects.create(researcher_id=instance)
-
