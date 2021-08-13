@@ -107,6 +107,7 @@ venv.bak/
 .mypy_cache/
 
 # development
+.vscode/
 mydata.json
 docker-compose.yml
 requirements.txt

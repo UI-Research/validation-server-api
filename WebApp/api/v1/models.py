@@ -1,13 +1,12 @@
+import boto3
+import json
+import os
+
 from django.db import models
 from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from WebApp.users.models import User
-from WebApp.api.v1.utilities import trigger_smartnoise
-
-import boto3
-import json
-import os
 
 class Command(models.Model):
     COMMAND_TYPE_CHOICES = [
@@ -54,7 +53,7 @@ class ConfidentialDataRun(models.Model):
     date_time_run_submitted = models.DateTimeField(auto_now_add=True)
 
 @receiver(post_save, sender=ConfidentialDataRun)
-def trigger_synthetic_data_run(sender, instance, created, **kwargs):
+def trigger_confidential_data_run(sender, instance, created, **kwargs):
     if created:
         trigger_smartnoise(instance, confidential_query=True)
 
@@ -86,3 +85,31 @@ class PublicUseBudget(models.Model):
 def create_public_use_budget(sender, instance, created, **kwargs):
     if created:
         PublicUseBudget.objects.create(researcher_id=instance)
+
+# helper function to trigger smartnoise lambda
+def trigger_smartnoise(instance, confidential_query=False):
+    # pull fields and create lambda payload
+    command_id = getattr(instance, "command_id").command_id
+    command = Command.objects.get(command_id=command_id)
+    payload = {
+        "command_id": command_id,
+        "run_id": instance.run_id,
+        "confidential_query": confidential_query,
+        "epsilon": str(instance.epsilon),
+        "transformation_query": command.sanitized_command_input["transformation_query"],
+        "analysis_query": command.sanitized_command_input["analysis_query"],
+        "debug": os.getenv("SMARTNOISE_DEBUG", True)
+    }
+    payload = json.dumps(payload).encode()
+    # invoke lambda function
+    client = boto3.client(
+        "lambda", 
+        region_name="us-east-1",
+        aws_access_key_id = os.getenv('AWS_ACCESS_KEY_ID'),
+        aws_secret_access_key = os.getenv('AWS_SECRET_ACCESS_KEY')
+    )
+    response = client.invoke(
+        FunctionName="validation-server-engine", 
+        InvocationType="Event", 
+        Payload=payload
+    )
