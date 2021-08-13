@@ -12,6 +12,9 @@ from rest_framework.authentication import SessionAuthentication, BasicAuthentica
 from WebApp.api.v1.permissions import IsAdministrator, IsOwner
 from WebApp.api.v1.backend import Backend
 
+import boto3
+import json
+
 class CommandList(generics.ListCreateAPIView):
     """
     List all commands, create a new command instance
@@ -24,11 +27,6 @@ class CommandList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(researcher_id=self.request.user)
-
-    # def perform_create(self, serializer):
-    #     instance = serializer.save()
-    #     Backend.send_request(instance.command_id)
-    #     return Response(serializer.data)  
 
 class CommandDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated, IsOwner]
@@ -138,7 +136,6 @@ class SyntheticDataResultDetail(generics.RetrieveUpdateDestroyAPIView):
 class SyntheticDataRunList(generics.ListCreateAPIView):
     queryset = SyntheticDataRun.objects.all()
     serializer_class = SyntheticDataRunSerializer
-    
 
 class SyntheticDataRunDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = SyntheticDataRun.objects.all()

@@ -254,7 +254,8 @@ fi
 echo "-----------------------------------------------------"
 echo "Export mysql data"
 echo "-----------------------------------------------------"
-docker exec web python manage.py dumpdata users --output mydata.json
+#docker exec web python manage.py dumpdata users authtoken v1 --output mydata.json
+docker exec mysql bash ./scripts/export_mysql_backup.sh
 
 
 #exit 1 # terminate and indicate error
@@ -294,6 +295,7 @@ if [ -f "./docker-compose.yml" ]; then
       echo "-----------------------------------------------------"
 
       docker-compose up -d --remove-orphans
+      docker system prune --all --volumes --force
       echo "-----------------------------------------------------"
       echo "Running as detached means rebuilding containers to recompile code"
       echo "-----------------------------------------------------"
@@ -317,7 +319,7 @@ if [ -f "./docker-compose.yml" ]; then
       echo "-----------------------------------------------------"
       echo "Import mysql data"
       echo "-----------------------------------------------------"
-      docker exec web python manage.py loaddata mydata.json
+      docker exec mysql bash ./scripts/import_mysql_backup.sh
 
 
       docker_ip=$(docker-machine ip $machine_name)
@@ -381,7 +383,7 @@ if [ -f "./docker-compose.yml" ]; then
       docker exec -it web  pip-licenses --with-system --with-urls --order=license
     else
       echo "-----------------------------------------------------"
-      echo "No security or version checks were donw"
+      echo "No security or version checks were done"
       echo "-----------------------------------------------------"
     fi
 
