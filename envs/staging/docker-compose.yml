@@ -50,8 +50,6 @@ services:
       - "3306:3306"
     env_file: .env
     volumes:
-      - ./WebApp/scripts/import_mysql_backup.sh:/scripts/import_mysql_backup.sh
-      - ./WebApp/scripts/validation_server_api_backup.sql:/scripts/validation_server_api_backup.sql
       - ./WebApp/scripts/:/scripts
   web:
     container_name: web

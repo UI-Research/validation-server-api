@@ -107,7 +107,9 @@ venv.bak/
 .mypy_cache/
 
 # development
+.vscode/
 mydata.json
 docker-compose.yml
 requirements.txt
 nginx/
+WebApp/scripts/validation_server_api_backup.sql
