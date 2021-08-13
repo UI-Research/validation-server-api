@@ -91,6 +91,7 @@ def trigger_smartnoise(instance, confidential_query=False):
     # pull fields and create lambda payload
     command_id = getattr(instance, "command_id").command_id
     command = Command.objects.get(command_id=command_id)
+    debug = os.getenv("SMARTNOISE_DEBUG", 'true').lower() == 'true'
     payload = {
         "command_id": command_id,
         "run_id": instance.run_id,
@@ -98,7 +99,7 @@ def trigger_smartnoise(instance, confidential_query=False):
         "epsilon": str(instance.epsilon),
         "transformation_query": command.sanitized_command_input["transformation_query"],
         "analysis_query": command.sanitized_command_input["analysis_query"],
-        "debug": os.getenv("SMARTNOISE_DEBUG", True)
+        "debug": debug
     }
     payload = json.dumps(payload).encode()
     # invoke lambda function
