@@ -105,11 +105,17 @@ class PublicUseBudgetRetrieve(mixins.RetrieveModelMixin,
     queryset = PublicUseBudget.objects.all()
     serializer_class = PublicUseBudgetSerializer
 
-
 class ConfidentialDataResultList(generics.ListCreateAPIView):
-    queryset = ConfidentialDataResult.objects.all()
     serializer_class = ConfidentialDataResultSerializer
-    
+
+    def get_queryset(self):
+        queryset = ConfidentialDataResult.objects.all()
+        command = self.request.query_params.get('command_id')
+
+        if command is not None:
+            queryset = queryset.filter(command_id=command)
+
+        return queryset
 
 class ConfidentialDataResultDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = ConfidentialDataResult.objects.all()
@@ -127,16 +133,21 @@ class ConfidentialDataRunList(generics.ListCreateAPIView):
 
         return queryset
 
-    
-
 class ConfidentialDataRunDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = ConfidentialDataRun.objects.all()
     serializer_class = ConfidentialDataRunSerializer
 
 class SyntheticDataResultList(generics.ListCreateAPIView):
-    queryset = SyntheticDataResult.objects.all()
     serializer_class = SyntheticDataResultSerializer
     
+    def get_queryset(self):
+        queryset = SyntheticDataResult.objects.all()
+        command = self.request.query_params.get('command_id')
+
+        if command is not None:
+            queryset = queryset.filter(command_id=command)
+
+        return queryset
 
 class SyntheticDataResultDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = SyntheticDataResult.objects.all()
@@ -154,8 +165,6 @@ class SyntheticDataRunList(generics.ListCreateAPIView):
             queryset = queryset.filter(command_id=command)
 
         return queryset
-
-
 
 class SyntheticDataRunDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = SyntheticDataRun.objects.all()
