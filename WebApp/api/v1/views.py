@@ -116,8 +116,17 @@ class ConfidentialDataResultDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ConfidentialDataResultSerializer
 
 class ConfidentialDataRunList(generics.ListCreateAPIView):
-    queryset = ConfidentialDataRun.objects.all()
     serializer_class = ConfidentialDataRunSerializer
+
+    def get_queryset(self):
+        queryset = ConfidentialDataRun.objects.all()
+        command = self.request.query_params.get('command_id')
+
+        if command is not None:
+            queryset = queryset.filter(command_id=command)
+
+        return queryset
+
     
 
 class ConfidentialDataRunDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -134,8 +143,19 @@ class SyntheticDataResultDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = SyntheticDataResultSerializer
 
 class SyntheticDataRunList(generics.ListCreateAPIView):
-    queryset = SyntheticDataRun.objects.all()
     serializer_class = SyntheticDataRunSerializer
+
+    # Show all of the runs of a particular command
+    def get_queryset(self):
+        queryset = SyntheticDataRun.objects.all()
+        command = self.request.query_params.get('command_id')
+
+        if command is not None:
+            queryset = queryset.filter(command_id=command)
+
+        return queryset
+
+
 
 class SyntheticDataRunDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = SyntheticDataRun.objects.all()
