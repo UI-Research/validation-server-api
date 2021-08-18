@@ -7,6 +7,7 @@ class IsOwner(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         return obj.researcher_id == request.user
 
+
 # class IsAdminOrReadOnly(permissions.BasePermission):
 #     """
 #     The request is authenticated as admin, or is a read-only request.
