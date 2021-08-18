@@ -122,7 +122,6 @@ class ConfidentialDataResultDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ConfidentialDataResultSerializer
 
 class ConfidentialDataRunList(generics.ListCreateAPIView):
-    permission_classes = [IsAuthenticated, IsOwner]
     serializer_class = ConfidentialDataRunSerializer
 
     def get_queryset(self):
@@ -135,12 +134,10 @@ class ConfidentialDataRunList(generics.ListCreateAPIView):
         return queryset
 
 class ConfidentialDataRunDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthenticated, IsOwner]
     queryset = ConfidentialDataRun.objects.all()
     serializer_class = ConfidentialDataRunSerializer
 
 class SyntheticDataResultList(generics.ListCreateAPIView):
-    permission_classes = [IsAuthenticated, IsOwner]
     serializer_class = SyntheticDataResultSerializer
     
     def get_queryset(self):
@@ -153,12 +150,10 @@ class SyntheticDataResultList(generics.ListCreateAPIView):
         return queryset
 
 class SyntheticDataResultDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthenticated, IsOwner]
     queryset = SyntheticDataResult.objects.all()
     serializer_class = SyntheticDataResultSerializer
 
 class SyntheticDataRunList(generics.ListCreateAPIView):
-    permission_classes = [IsAuthenticated, IsOwner]
     serializer_class = SyntheticDataRunSerializer
 
     # Show all of the runs of a particular command
@@ -172,6 +167,5 @@ class SyntheticDataRunList(generics.ListCreateAPIView):
         return queryset
 
 class SyntheticDataRunDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthenticated, IsOwner]
     queryset = SyntheticDataRun.objects.all()
     serializer_class = SyntheticDataRunSerializer
