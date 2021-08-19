@@ -24,6 +24,7 @@ class Command(models.Model):
         unique_together = [["command_name", "researcher_id"]]
 
 class SyntheticDataRun(models.Model):
+    researcher_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, db_column="researcher_id")
     command_id = models.ForeignKey(Command, on_delete=models.CASCADE, db_column='command_id')
     run_id = models.AutoField(primary_key=True)
     epsilon = models.DecimalField(decimal_places=2, max_digits=5)
@@ -32,7 +33,7 @@ class SyntheticDataRun(models.Model):
 @receiver(post_save, sender=Command)
 def create_synthetic_data_run(sender, instance, created, **kwargs):
     if created:
-        SyntheticDataRun.objects.create(command_id=instance, epsilon=1.0)
+        SyntheticDataRun.objects.create(researcher_id=instance.researcher_id, command_id=instance, epsilon=1.0)
 
 @receiver(post_save, sender=SyntheticDataRun)
 def trigger_synthetic_data_run(sender, instance, created, **kwargs):
@@ -40,6 +41,7 @@ def trigger_synthetic_data_run(sender, instance, created, **kwargs):
         trigger_smartnoise(instance, confidential_query=False)
 
 class SyntheticDataResult(models.Model):
+    researcher_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, db_column="researcher_id")
     command_id = models.ForeignKey(Command, on_delete=models.CASCADE, db_column='command_id')
     run_id = models.OneToOneField(SyntheticDataRun, primary_key = True, on_delete=models.CASCADE, db_column='run_id')
     accuracy = models.JSONField()
@@ -47,6 +49,7 @@ class SyntheticDataResult(models.Model):
     privacy_budget_used = models.DecimalField(decimal_places=2, max_digits=10, null=False, default=0)
 
 class ConfidentialDataRun(models.Model):
+    researcher_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, db_column="researcher_id")
     command_id = models.ForeignKey(Command, on_delete=models.CASCADE, db_column='command_id')
     run_id = models.AutoField(primary_key=True)
     epsilon = models.DecimalField(decimal_places=2, max_digits=5)
@@ -58,6 +61,7 @@ def trigger_confidential_data_run(sender, instance, created, **kwargs):
         trigger_smartnoise(instance, confidential_query=True)
 
 class ConfidentialDataResult(models.Model):
+    researcher_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, db_column="researcher_id")
     command_id = models.ForeignKey(Command, on_delete=models.CASCADE, db_column='command_id')
     run_id = models.OneToOneField(ConfidentialDataRun, primary_key=True, on_delete=models.CASCADE, db_column='run_id')
     accuracy = models.JSONField()

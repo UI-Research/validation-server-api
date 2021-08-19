@@ -106,10 +106,11 @@ class PublicUseBudgetRetrieve(mixins.RetrieveModelMixin,
     serializer_class = PublicUseBudgetSerializer
 
 class ConfidentialDataResultList(generics.ListCreateAPIView):
+    permission_classes = [IsAuthenticated, IsOwner]
     serializer_class = ConfidentialDataResultSerializer
 
     def get_queryset(self):
-        queryset = ConfidentialDataResult.objects.all()
+        queryset = ConfidentialDataResult.objects.all().filter(researcher_id=self.request.user)
         command = self.request.query_params.get('command_id')
 
         if command is not None:
@@ -118,6 +119,7 @@ class ConfidentialDataResultList(generics.ListCreateAPIView):
         return queryset
 
 class ConfidentialDataResultDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated, IsOwner]
     queryset = ConfidentialDataResult.objects.all()
     serializer_class = ConfidentialDataResultSerializer
 
@@ -125,7 +127,7 @@ class ConfidentialDataRunList(generics.ListCreateAPIView):
     serializer_class = ConfidentialDataRunSerializer
 
     def get_queryset(self):
-        queryset = ConfidentialDataRun.objects.all()
+        queryset = ConfidentialDataRun.objects.all().filter(researcher_id=self.request.user)
         command = self.request.query_params.get('command_id')
 
         if command is not None:
@@ -141,7 +143,7 @@ class SyntheticDataResultList(generics.ListCreateAPIView):
     serializer_class = SyntheticDataResultSerializer
     
     def get_queryset(self):
-        queryset = SyntheticDataResult.objects.all()
+        queryset = SyntheticDataResult.objects.all().filter(researcher_id=self.request.user)
         command = self.request.query_params.get('command_id')
 
         if command is not None:
@@ -158,7 +160,7 @@ class SyntheticDataRunList(generics.ListCreateAPIView):
 
     # Show all of the runs of a particular command
     def get_queryset(self):
-        queryset = SyntheticDataRun.objects.all()
+        queryset = SyntheticDataRun.objects.all().filter(researcher_id=self.request.user)
         command = self.request.query_params.get('command_id')
 
         if command is not None:
