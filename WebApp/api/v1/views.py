@@ -105,38 +105,75 @@ class PublicUseBudgetRetrieve(mixins.RetrieveModelMixin,
     queryset = PublicUseBudget.objects.all()
     serializer_class = PublicUseBudgetSerializer
 
-
 class ConfidentialDataResultList(generics.ListCreateAPIView):
-    queryset = ConfidentialDataResult.objects.all()
+    permission_classes = [IsAuthenticated, IsOwner]
     serializer_class = ConfidentialDataResultSerializer
-    
+
+    def get_queryset(self):
+        queryset = ConfidentialDataResult.objects.all().filter(researcher_id=self.request.user)
+        command = self.request.query_params.get('command_id')
+
+        if command is not None:
+            queryset = queryset.filter(command_id=command)
+
+        return queryset
 
 class ConfidentialDataResultDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated, IsOwner]
     queryset = ConfidentialDataResult.objects.all()
     serializer_class = ConfidentialDataResultSerializer
 
 class ConfidentialDataRunList(generics.ListCreateAPIView):
-    queryset = ConfidentialDataRun.objects.all()
+    permission_classes = [IsAuthenticated, IsOwner]
     serializer_class = ConfidentialDataRunSerializer
-    
+
+    def get_queryset(self):
+        queryset = ConfidentialDataRun.objects.all().filter(researcher_id=self.request.user)
+        command = self.request.query_params.get('command_id')
+
+        if command is not None:
+            queryset = queryset.filter(command_id=command)
+
+        return queryset
 
 class ConfidentialDataRunDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated, IsOwner]
     queryset = ConfidentialDataRun.objects.all()
     serializer_class = ConfidentialDataRunSerializer
 
 class SyntheticDataResultList(generics.ListCreateAPIView):
-    queryset = SyntheticDataResult.objects.all()
+    permission_classes = [IsAuthenticated, IsOwner]
     serializer_class = SyntheticDataResultSerializer
     
+    def get_queryset(self):
+        queryset = SyntheticDataResult.objects.all().filter(researcher_id=self.request.user)
+        command = self.request.query_params.get('command_id')
+
+        if command is not None:
+            queryset = queryset.filter(command_id=command)
+
+        return queryset
 
 class SyntheticDataResultDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated, IsOwner]
     queryset = SyntheticDataResult.objects.all()
     serializer_class = SyntheticDataResultSerializer
 
 class SyntheticDataRunList(generics.ListCreateAPIView):
-    queryset = SyntheticDataRun.objects.all()
+    permission_classes = [IsAuthenticated, IsOwner]
     serializer_class = SyntheticDataRunSerializer
 
+    # Show all of the runs of a particular command
+    def get_queryset(self):
+        queryset = SyntheticDataRun.objects.all().filter(researcher_id=self.request.user)
+        command = self.request.query_params.get('command_id')
+
+        if command is not None:
+            queryset = queryset.filter(command_id=command)
+
+        return queryset
+
 class SyntheticDataRunDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated, IsOwner]
     queryset = SyntheticDataRun.objects.all()
     serializer_class = SyntheticDataRunSerializer
