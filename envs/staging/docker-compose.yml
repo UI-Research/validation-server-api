@@ -6,11 +6,7 @@ services:
     image: app
     build:
       context: ./validation-server-frontend/services/app/
-      dockerfile: dev.DockerFile
-    environment:
-      # Force polling instead of watching to work around Docker osxfs issues.
-      CHOKIDAR_USEPOLLING: '1'
-      CHOKIDAR_INTERVAL: '1000'
+      dockerfile: DockerFile
     env_file: .env
     ports:
       - "3000:3000"
