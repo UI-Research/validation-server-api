@@ -99,7 +99,7 @@ def trigger_smartnoise(instance, confidential_query=False):
     payload = {
         "command_id": command_id,
         "run_id": instance.run_id,
-        "researcher_id": command.researcher_id,
+        "researcher_id": command.researcher_id.id,
         "confidential_query": confidential_query,
         "epsilon": str(instance.epsilon),
         "transformation_query": command.sanitized_command_input["transformation_query"],
