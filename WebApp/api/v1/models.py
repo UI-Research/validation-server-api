@@ -94,6 +94,7 @@ def create_public_use_budget(sender, instance, created, **kwargs):
 def trigger_smartnoise(instance, confidential_query=False):
     # pull fields and create lambda payload
     command_id = getattr(instance, "command_id").command_id
+    researcher_id = getattr(instance, "researcher_id").researcher_id
     command = Command.objects.get(command_id=command_id)
     debug = os.getenv("SMARTNOISE_DEBUG", 'true').lower() == 'true'
     payload = {
