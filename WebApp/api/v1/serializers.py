@@ -58,8 +58,6 @@ class ConfidentialDataResultSerializer(serializers.ModelSerializer):
             "researcher_id",
             "accuracy",
             "result",
-            "original_display_results_decision",
-            "original_release_results_decision",
             "display_results_decision",
             "release_results_decision",
             "privacy_budget_used"
