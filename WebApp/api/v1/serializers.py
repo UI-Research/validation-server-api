@@ -34,6 +34,8 @@ class SyntheticDataResultSerializer(serializers.ModelSerializer):
         ]
 
 class ConfidentialDataRunSerializer(serializers.ModelSerializer):
+    researcher_id = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
+
     class Meta:
         model = ConfidentialDataRun
         fields = [
@@ -44,7 +46,10 @@ class ConfidentialDataRunSerializer(serializers.ModelSerializer):
             "date_time_run_submitted"
             ]
 
+
 class ConfidentialDataResultSerializer(serializers.ModelSerializer):
+    researcher_id = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
+
     class Meta:
         model = ConfidentialDataResult
         fields = [
