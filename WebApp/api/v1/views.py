@@ -38,7 +38,7 @@ class ReviewAndRefinementBudgetList(generics.ListCreateAPIView):
     serializer_class = ReviewAndRefinementBudgetSerializer
 
     def get_queryset(self, *args, **kwargs):
-        return ReviewAndRefinementBudget.objects.all().filter(researcher_id=self.request.user)
+        return ReviewAndRefinementBudget.objects.all().filter(researcher_id=self.request.user).order_by('-researcher_id')
 
 class ReviewAndRefinementBudgetDetail(generics.RetrieveUpdateAPIView):
     permission_classes = [IsAuthenticated, IsAdministrator]
@@ -71,7 +71,7 @@ class PublicUseBudgetList(generics.ListCreateAPIView):
     serializer_class = PublicUseBudgetSerializer
 
     def get_queryset(self, *args, **kwargs):
-        return PublicUseBudget.objects.all().filter(researcher_id=self.request.user)
+        return PublicUseBudget.objects.all().filter(researcher_id=self.request.user).order_by('-researcher_id')
 
 class PublicUseBudgetDetail(generics.RetrieveUpdateAPIView):
     permission_classes = [IsAuthenticated, IsAdministrator]
@@ -118,6 +118,9 @@ class ConfidentialDataResultList(generics.ListCreateAPIView):
 
         return queryset
 
+    def perform_create(self, serializer):
+        serializer.save(researcher_id=self.request.user)
+
 class ConfidentialDataResultDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated, IsOwner]
     queryset = ConfidentialDataResult.objects.all()
@@ -135,11 +138,18 @@ class ConfidentialDataRunList(generics.ListCreateAPIView):
             queryset = queryset.filter(command_id=command)
 
         return queryset
+    
+    def perform_create(self, serializer):
+        serializer.save(researcher_id=self.request.user)
+   
 
 class ConfidentialDataRunDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated, IsOwner]
-    queryset = ConfidentialDataRun.objects.all()
     serializer_class = ConfidentialDataRunSerializer
+
+    def get_queryset(self):
+        queryset = ConfidentialDataRun.objects.all().filter(researcher_id=self.request.user)
+        return queryset
 
 class SyntheticDataResultList(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated, IsOwner]
@@ -153,6 +163,9 @@ class SyntheticDataResultList(generics.ListCreateAPIView):
             queryset = queryset.filter(command_id=command)
 
         return queryset
+
+    def perform_create(self, serializer):
+        serializer.save(researcher_id=self.request.user)
 
 class SyntheticDataResultDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated, IsOwner]
