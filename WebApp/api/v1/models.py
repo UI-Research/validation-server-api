@@ -85,7 +85,8 @@ class ConfidentialDataResult(models.Model):
 
         self.original_display_results_decision = self.display_results_decision
         self.original_release_results_decision = self.release_results_decision
-       
+        super(ConfidentialDataResult, self).save(*args, **kwargs)
+
 class ReviewAndRefinementBudget(models.Model):
     researcher_id = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, primary_key=True, db_column='researcher_id')
     total_budget_allocated = models.DecimalField(decimal_places=2, max_digits=10, null=False, default=100)
