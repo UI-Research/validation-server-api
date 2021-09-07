@@ -85,7 +85,14 @@ class ConfidentialDataResult(models.Model):
 
         self.original_display_results_decision = self.display_results_decision
         self.original_release_results_decision = self.release_results_decision
+
+        command = Command.objects.get(command_id=self.command_id)
+        if (self.researcher_id != command.researcher_id):
+            self.researcher_id = command.researcher_id
+
         super(ConfidentialDataResult, self).save(*args, **kwargs)
+
+
 
 class ReviewAndRefinementBudget(models.Model):
     researcher_id = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, primary_key=True, db_column='researcher_id')
