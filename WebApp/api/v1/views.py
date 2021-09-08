@@ -118,8 +118,8 @@ class ConfidentialDataResultList(generics.ListCreateAPIView):
 
         return queryset
 
-    def perform_create(self, serializer):
-        serializer.save(researcher_id=self.request.user)
+#    def perform_create(self, serializer):
+#        serializer.save(researcher_id=self.request.user)
 
 class ConfidentialDataResultDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated, IsOwner]
@@ -164,8 +164,8 @@ class SyntheticDataResultList(generics.ListCreateAPIView):
 
         return queryset
 
-    def perform_create(self, serializer):
-        serializer.save(researcher_id=self.request.user)
+ #   def perform_create(self, serializer):
+ #       serializer.save(researcher_id=self.request.user)
 
 class SyntheticDataResultDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated, IsOwner]
