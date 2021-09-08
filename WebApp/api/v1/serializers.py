@@ -48,8 +48,6 @@ class ConfidentialDataRunSerializer(serializers.ModelSerializer):
 
 
 class ConfidentialDataResultSerializer(serializers.ModelSerializer):
-    researcher_id = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
-
     class Meta:
         model = ConfidentialDataResult
         fields = [
