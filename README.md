@@ -1,5 +1,7 @@
 # validation-server-api
 
+Django REST API that connects the [validation-server-frontend](https://github.com/UI-Research/validation-server-frontend) with the [validation-server-engine](https://github.com/UI-Research/validation-server-engine).
+
 [![Built with](https://img.shields.io/badge/Built_with-Cookiecutter_Django_Rest-F7B633.svg)](https://github.com/agconti/cookiecutter-django-rest)
 
 See [cookiecutter-django-rest](https://github.com/agconti/cookiecutter-django-rest)
