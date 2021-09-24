@@ -37,7 +37,7 @@ MYSQL_DATABASE=mysql_data
 MYSQL_ROOT_PASSWORD=root
 # variables used in importing and exporting DB data
 MYSQL_USER=sa
-MYSQL_PASSWORD=***REMOVED***
+MYSQL_PASSWORD=sa_password
 ```
 
 Build your containers:
