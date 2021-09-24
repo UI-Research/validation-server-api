@@ -2,7 +2,6 @@
 
 ### django-rest-template
 
-[![Build Status](https://travis-ci.org/Urban Institute/django-rest-template.svg?branch=master)](https://travis-ci.org/Urban Institute/django-rest-template)
 [![Built with](https://img.shields.io/badge/Built_with-Cookiecutter_Django_Rest-F7B633.svg)](https://github.com/agconti/cookiecutter-django-rest)
 
 Template for Django API applications. Check out the project's [documentation](http://Urban Institute.github.io/django-rest-template/).
@@ -100,7 +99,7 @@ import requests
 token = "[YOUR TOKEN HERE]"
 headers = {"Authorization": f"Token {token}"}
 
-r = requests.get("http://0.0.0.0:8000/api/v1/runs/", headers = headers)
+r = requests.get("http://0.0.0.0:8000/api/v1/command/", headers = headers)
 
 r.json()
 ```
