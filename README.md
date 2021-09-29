@@ -30,14 +30,13 @@ repository for more detail.
 
 ** FOR LOCAL TESTING PURPOSES ONLY **
 
-You will need a .env file with the following specifications:
+This requires an .env file with the following variables set:
 
 ```bash
-MYSQL_DATABASE=
-MYSQL_ROOT_PASSWORD=
-# variables used in importing and exporting DB data
-MYSQL_USER=
-MYSQL_PASSWORD=
+MYSQL_DATABASE
+MYSQL_ROOT_PASSWORD
+MYSQL_USER
+MYSQL_PASSWORD
 ```
 
 Build your containers:
