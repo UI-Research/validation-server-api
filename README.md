@@ -33,11 +33,11 @@ repository for more detail.
 You will need a .env file with the following specifications:
 
 ```bash
-MYSQL_DATABASE=mysql_data
-MYSQL_ROOT_PASSWORD=root
+MYSQL_DATABASE=
+MYSQL_ROOT_PASSWORD=
 # variables used in importing and exporting DB data
-MYSQL_USER=sa
-MYSQL_PASSWORD=***REMOVED***
+MYSQL_USER=
+MYSQL_PASSWORD=
 ```
 
 Build your containers:
