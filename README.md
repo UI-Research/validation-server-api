@@ -1,11 +1,8 @@
 # validation-server-api
 
-### django-rest-template
+Django REST API that connects the [validation-server-frontend](https://github.com/UI-Research/validation-server-frontend) with the [validation-server-engine](https://github.com/UI-Research/validation-server-engine).
 
-[![Build Status](https://travis-ci.org/Urban Institute/django-rest-template.svg?branch=master)](https://travis-ci.org/Urban Institute/django-rest-template)
 [![Built with](https://img.shields.io/badge/Built_with-Cookiecutter_Django_Rest-F7B633.svg)](https://github.com/agconti/cookiecutter-django-rest)
-
-Template for Django API applications. Check out the project's [documentation](http://Urban Institute.github.io/django-rest-template/).
 
 See [cookiecutter-django-rest](https://github.com/agconti/cookiecutter-django-rest)
 repository for more detail.
@@ -30,14 +27,13 @@ repository for more detail.
 
 ** FOR LOCAL TESTING PURPOSES ONLY **
 
-You will need a .env file with the following specifications:
+This requires an .env file with the following variables set:
 
 ```bash
-MYSQL_DATABASE=mysql_data
-MYSQL_ROOT_PASSWORD=root
-# variables used in importing and exporting DB data
-MYSQL_USER=sa
-MYSQL_PASSWORD=***REMOVED***
+MYSQL_DATABASE
+MYSQL_ROOT_PASSWORD
+MYSQL_USER
+MYSQL_PASSWORD
 ```
 
 Build your containers:
@@ -100,7 +96,7 @@ import requests
 token = "[YOUR TOKEN HERE]"
 headers = {"Authorization": f"Token {token}"}
 
-r = requests.get("http://0.0.0.0:8000/api/v1/runs/", headers = headers)
+r = requests.get("http://0.0.0.0:8000/api/v1/command/", headers = headers)
 
 r.json()
 ```
