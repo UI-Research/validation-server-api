@@ -13,7 +13,7 @@ repository for more detail.
 
 - [Docker](https://docs.docker.com/docker-for-mac/install/)  
 
-### Staging Server
+### Staging Server 
 
 * Front End Site (requires log-in): `https://validation-server-stg.urban.org`
 
