@@ -1,4 +1,4 @@
-FROM nginx:1.15-alpine
+FROM nginx: 1.20.2-alpine
 ARG NGINX_PASSWORD
 ARG NGINX_USER
 
