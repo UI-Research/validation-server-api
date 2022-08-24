@@ -1,4 +1,4 @@
-FROM nginx:1.15-alpine
+FROM nginx:1.23.1-alpine
 ARG NGINX_PASSWORD
 ARG NGINX_USER
 
@@ -12,7 +12,7 @@ COPY nginx.conf  /etc/nginx/
 RUN mkdir /etc/nginx/ssl
 
 # add packages not available in Alpine
-RUN apk update && apk add nano bash openssl
+RUN apk update && apk add --no-cache openssl
 
 # Generating signing SSL private key
 RUN openssl genrsa -des3 -passout pass:urban1234 -out key.pem 2048
