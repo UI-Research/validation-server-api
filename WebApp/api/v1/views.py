@@ -10,9 +10,8 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from WebApp.api.v1.permissions import IsAdministrator, IsOwner
-from WebApp.api.v1.backend import Backend
 
-import boto3
+
 import json
 
 class CommandList(generics.ListCreateAPIView):
