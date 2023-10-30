@@ -12,4 +12,5 @@ WORKDIR code
 EXPOSE 8000
 
 # Run the production server
-CMD newrelic-admin run-program gunicorn --bind 0.0.0.0:8000 --access-logfile - WebApp.wsgi:application
+CMD gunicorn --bind 0.0.0.0:8000 --access-logfile - WebApp.wsgi:application
+#CMD newrelic-admin run-program gunicorn --bind 0.0.0.0:8000 --access-logfile - WebApp.wsgi:application
