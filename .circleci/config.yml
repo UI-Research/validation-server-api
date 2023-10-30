@@ -15,6 +15,7 @@ jobs:
           name: Build Containers Over SSH
           command: |
               ssh docker1@validation-server-stg.ssh.urban.org -p 22 "cd validation-server.urban.org && ls -lsat && ./deploy.sh -e ${CIRCLE_BRANCH} -m default"
+  
   build_dbg:
     machine:
       enabled: true
@@ -32,14 +33,12 @@ jobs:
               ssh docker1@validation-server-stg.ssh.urban.org -p 22 "cd validation-server.urban.org && ls -lsat && ./deploy.sh -e development -m default"
 workflows:
   version: 2
-  build_stg:
+  build:
     jobs:
       - build_stg:
           filters:
             branches:
               only: staging
-  build_dbg:
-    jobs:
       - build_dbg:
           filters:
             branches:
