@@ -22,4 +22,4 @@ workflows:
       - build_stg:
           filters:
             branches:
-              only: staging
+              only: staylor-debug
