@@ -42,4 +42,4 @@ workflows:
       - build_dbg:
           filters:
             branches:
-              only: staylor-debug
+              only: staylor_debug
