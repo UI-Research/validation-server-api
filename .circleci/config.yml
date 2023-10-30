@@ -15,11 +15,33 @@ jobs:
           name: Build Containers Over SSH
           command: |
               ssh docker1@validation-server-stg.ssh.urban.org -p 22 "cd validation-server.urban.org && ls -lsat && ./deploy.sh -e ${CIRCLE_BRANCH} -m default"
+  build_dbg:
+    machine:
+      enabled: true
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run: pwd
+      - run:
+          name: Deploy Code Over SSH
+          command: |
+              rsync -avz --exclude '.git' -e "ssh -p 22"  ~/repo/ docker1@validation-server-stg.ssh.urban.org:validation-server.urban.org/
+      - run:
+          name: Build Containers Over SSH
+          command: |
+              ssh docker1@validation-server-stg.ssh.urban.org -p 22 "cd validation-server.urban.org && ls -lsat && ./deploy.sh -e development -m default"
 workflows:
   version: 2
   build_stg:
     jobs:
       - build_stg:
+          filters:
+            branches:
+              only: staging
+
+  build_dbg:
+    jobs:
+      - build_dbg:
           filters:
             branches:
               only: staylor-debug
