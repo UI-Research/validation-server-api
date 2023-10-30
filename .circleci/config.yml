@@ -30,7 +30,7 @@ jobs:
       - run:
           name: Build Containers Over SSH
           command: |
-              ssh docker1@validation-server-stg.ssh.urban.org -p 22 "cd validation-server.urban.org && ls -lsat && ./deploy.sh -e development -m default"
+              ssh docker1@validation-server-stg.ssh.urban.org -p 22 "cd validation-server.urban.org && ls -lsat && ./deploy.sh -e staging -m default"
 workflows:
   version: 2
   build:
