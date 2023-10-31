@@ -41,8 +41,8 @@ services:
     depends_on:
       - app
   mysql:
-    image: mysql:8.0
     container_name: mysql
+    image: mysql:5.7
     restart: always
     ports:
       - "3306:3306"
