@@ -24,7 +24,7 @@ class Common(Configuration):
         'import_export',             # for importing and exporting data
         'drf_yasg',                  # required for swagger
         'corsheaders',
-        
+
         # Your apps
         'WebApp.users',
         'WebApp.api.v1',
@@ -48,7 +48,7 @@ class Common(Configuration):
     SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
     WSGI_APPLICATION = 'WebApp.wsgi.application'
 
-    #CORS
+    # CORS
     CORS_ALLOW_ALL_ORIGINS = True
 
     # Email
@@ -114,7 +114,7 @@ class Common(Configuration):
 
     # Set DEBUG to False as a default for safety
     # https://docs.djangoproject.com/en/dev/ref/settings/#debug
-    DEBUG = strtobool(os.getenv('DJANGO_DEBUG', 'no'))
+    DEBUG = bool(os.getenv('DJANGO_DEBUG', 0))
 
     # Password Validation
     # https://docs.djangoproject.com/en/2.0/topics/auth/passwords/#module-django.contrib.auth.password_validation
