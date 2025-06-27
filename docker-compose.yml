@@ -13,8 +13,6 @@ services:
     volumes:
       - ./nginx/log/nginx:/var/log/nginx
       - ./nginx/sites-enabled:/etc/nginx/sites-enabled
-      - ./nginx/ssl/validation-server-stg.urban.org.pem:/etc/nginx/ssl/cert.pem
-      - ./nginx/ssl/validation-server-stg.urban.org.key:/etc/nginx/ssl/key.pem
 
     volumes_from:
       - web
